@@ -3,6 +3,7 @@ import {
   View,
 } from 'react-native';
 import Typography from '../../components/Typography';
+import Button from '../../components/Button';
 
 const DashboardPage = () => (
   <View>
@@ -17,6 +18,8 @@ const DashboardPage = () => (
     <Typography variant="text">
       Teste
     </Typography>
+
+    <Button label="Continuar" />
   </View>
 );
 
