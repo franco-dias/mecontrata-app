@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import Typography from '../../components/Typography';
 import Button from '../../components/Button';
+import IconButton from '../../components/IconButton';
 
 const DashboardPage = () => (
   <View>
@@ -20,6 +21,8 @@ const DashboardPage = () => (
     </Typography>
 
     <Button label="Continuar" />
+
+    <IconButton iconName="add" />
   </View>
 );
 
