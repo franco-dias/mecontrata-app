@@ -9,7 +9,7 @@ const AppStack = createDrawerNavigator();
 
 const AppRoutes = () => (
   <AppStack.Navigator drawerType="slide" drawerContent={(props) => <CustomDrawer {...props} />}>
-    {/* <AppStack.Screen name="Dashboard" component={Dashboard} /> */}
+    <AppStack.Screen name="Dashboard" component={Dashboard} />
     <AppStack.Screen name="SandboxRonaldo" component={SandboxRonaldo} />
   </AppStack.Navigator>
 );
