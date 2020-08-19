@@ -20,4 +20,4 @@ const Text = styled.Text`
   ${({ variant }) => textStyles[variant]}
 `;
 
-export default Text;
+export { Text };
