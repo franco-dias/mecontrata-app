@@ -5,12 +5,14 @@ import Typography from '../../components/Typography';
 import PhotoUpload from '../../components/PhotoUpload';
 import PhotoUploadList from '../../components/PhotoUploadList';
 import Icon from '../../components/Icon';
+import PageHeader from '../../components/PageHeader';
 
-const Sandbox = () => {
+const Sandbox = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
   const [photos, setPhotos] = useState([]);
   return (
     <View style={{ flex: 1, alignItems: 'center', padding: 24 }}>
+      <PageHeader navigation={navigation} />
       <Typography variant="subtitle">
         Sandbox
       </Typography>
@@ -24,13 +26,6 @@ const Sandbox = () => {
         photos={photos}
         setPhotos={setPhotos}
         limit={5}
-      />
-
-      <Icon
-        lib="Ionic"
-        iconName="american-football"
-        size={40}
-        color="#000"
       />
     </View>
   );

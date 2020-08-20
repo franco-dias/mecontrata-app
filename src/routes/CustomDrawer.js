@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
+import IconButton from '../components/IconButton';
 import Typography from '../components/Typography';
 import Icon from '../components/Icon';
 
@@ -15,7 +16,7 @@ import {
   MenuContainer,
 } from './style';
 
-const CustomDrawer = () => (
+const CustomDrawer = ({ navigation }) => (
   <DrawerContainer>
     <HeaderRow>
       <UserInfo>
@@ -25,7 +26,6 @@ const CustomDrawer = () => (
           <UserEmail> john.doe@example.com </UserEmail>
         </View>
       </UserInfo>
-      <Icon lib="MaterialDesign" iconName="sort" size={24} color="#666" />
     </HeaderRow>
     <MenuContainer>
       <View>

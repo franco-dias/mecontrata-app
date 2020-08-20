@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 const DrawerContainer = styled.View`
-  padding: 44px 20px;
+  padding: 44px 12px 44px 20px;
   flex: 1;
 `;
 
