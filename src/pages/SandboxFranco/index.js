@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-
 import { View } from 'react-native';
+
 import Typography from '../../components/Typography';
 import PhotoUpload from '../../components/PhotoUpload';
 import PhotoUploadList from '../../components/PhotoUploadList';
-import Icon from '../../components/Icon';
 import PageHeader from '../../components/PageHeader';
 
 const Sandbox = ({ navigation }) => {
