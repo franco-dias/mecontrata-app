@@ -1,13 +1,12 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { ButtonIcon } from './style';
+import { Container } from './style';
 
-function IconButton({ iconName }) {
+function IconButton({ children, ...props }) {
   return (
-    <ButtonIcon>
-      <Icon name={iconName} size={24} />
-    </ButtonIcon>
+    <Container {...props}>
+      {children}
+    </Container>
   );
 }
 

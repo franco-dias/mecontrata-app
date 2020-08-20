@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-const ButtonIcon = styled.TouchableOpacity`
+const Container = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
   border-radius: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 
-export { ButtonIcon };
+export { Container };
