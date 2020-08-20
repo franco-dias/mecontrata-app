@@ -23,7 +23,7 @@ const DashboardPage = () => (
 
     <Button label="Continuar" />
 
-    <IconButton iconName="add" />
+    {/* <IconButton iconName="add" /> */}
     <SpotlightCard
       name="Ronaldo Alves"
       occupation="Carpinteiro"
