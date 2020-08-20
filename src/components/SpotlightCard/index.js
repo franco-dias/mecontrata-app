@@ -1,45 +1,85 @@
 import React from 'react';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import { StyleSheet } from 'react-native';
 import {
-  Balloon, Row, ImagePhoto, IconFromIonic, IconFromAnt, IconFromMaterial,
+  Balloon, Row, ImagePhoto, CustomText,
 } from './style';
+import Icon from '../Icon';
 import Typography from '../Typography';
 
 function SpotlightCard({
-  name, occupation, local, likes,
+  name,
+  occupation,
+  local,
+  likes,
+  profilePhoto,
+  colorBalloon,
+  colorTitle,
+  colorCustomText,
+  colorIcon,
 }) {
   return (
-    <Balloon>
+    <Balloon
+    // eslint-disable-next-line no-use-before-define
+      style={styles.shadow}
+      color={colorBalloon}
+    >
       <Row>
         <ImagePhoto
-          source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+          source={{ uri: profilePhoto }}
         />
-        <Typography variant="subtitle">
+        <Typography variant="subtitle" color={colorTitle}>
           {name}
         </Typography>
       </Row>
       <Row>
-        <IconFromMaterial style={{ marginRight: 10 }} name="briefcase-outline" size={20} />
-        <Typography variant="text">
+        <Icon
+          lib="MaterialDesign"
+          iconName="briefcase-outline"
+          size={20}
+          color={colorIcon}
+        />
+        <CustomText color={colorCustomText}>
           {occupation}
-        </Typography>
+        </CustomText>
       </Row>
       <Row>
-        <IconFromIonic style={{ marginRight: 10 }} name="location-outline" size={20} />
-        <Typography variant="text">
+        <Icon
+          lib="Ionic"
+          iconName="location-outline"
+          size={20}
+          color={colorIcon}
+        />
+        <CustomText color={colorCustomText}>
           {local}
-        </Typography>
+        </CustomText>
       </Row>
       <Row>
-        <IconFromAnt style={{ marginRight: 10 }} name="like2" size={20} />
-        <Typography variant="text">
+        <Icon
+          lib="AntDesign"
+          iconName="like2"
+          size={20}
+          color={colorIcon}
+        />
+        <CustomText color={colorCustomText}>
           {likes}
-        </Typography>
+        </CustomText>
       </Row>
 
     </Balloon>
   );
 }
+
+const styles = StyleSheet.create({
+  shadow: {
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1,
+  },
+});
 
 export default SpotlightCard;

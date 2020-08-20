@@ -6,7 +6,7 @@ const Icon = ({
   size,
   color,
 }) => {
-  const MaterialIcon = lazy(() => import('react-native-vector-icons/MaterialIcons'));
+  const MaterialIcon = lazy(() => import('react-native-vector-icons/MaterialCommunityIcons'));
   const AntDesignIcon = lazy(() => import('react-native-vector-icons/AntDesign'));
   const FontAwesomeIcon = lazy(() => import('react-native-vector-icons/FontAwesome'));
   const Ionicon = lazy(() => import('react-native-vector-icons/Ionicons'));
@@ -24,7 +24,7 @@ const Icon = ({
       default:
         return null;
     }
-  }, [lib, iconName]);
+  }, [lib, iconName, color]);
 
   return (
     <Suspense fallback={null}>
