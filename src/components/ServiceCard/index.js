@@ -5,10 +5,11 @@ import {
   CategoryColor, 
   ProfilePhoto
 } from './style';
+import Icon from '../Icon';
 
 import { StyleSheet, View, Text } from 'react-native';
 
-function ServiceCard({ color, photoURL, name, occupation }) {
+function ServiceCard({ color, photoURL, name, occupation, trash }) {
   return (
     <Card style={styles.shadow}>
       <CategoryColor color={ color } />
@@ -17,7 +18,7 @@ function ServiceCard({ color, photoURL, name, occupation }) {
         source={{ uri: photoURL }}
       />
 
-      <View>
+      <View style={styles.texts}>
         <Text style={styles.name}>
           { name }
         </Text>
@@ -25,6 +26,17 @@ function ServiceCard({ color, photoURL, name, occupation }) {
         <Text style={styles.occupation}>
           { occupation }
         </Text>
+      </View>
+
+      <View style={styles.icon}>
+        { trash &&
+          (<Icon
+            lib="Feather"
+            iconName="trash"
+            size={20}
+            color="#DADADA"
+          />)
+        }
       </View>
     </Card>
   );
@@ -41,6 +53,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 1,
   },
+  texts: {
+    flexGrow: 1
+  },
   name: {
     fontSize: 16,
     fontFamily: "InterSemiBold",
@@ -50,6 +65,9 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontFamily: "InterMedium",
     color: "#666"
+  },
+  icon: {
+    padding: 15
   }
 });
 

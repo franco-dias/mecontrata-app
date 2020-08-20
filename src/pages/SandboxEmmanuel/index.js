@@ -13,6 +13,7 @@ const Sandbox = () => {
         photoURL="https://reactnative.dev/img/tiny_logo.png" 
         name="John Doe" 
         occupation="Eletricista - Uberlândia/MG"
+        trash={true}
       />
     </View>
   );
