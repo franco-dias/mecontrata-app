@@ -12,7 +12,7 @@ const Card = styled.View`
 const CategoryColor = styled.View`
   width: 12px;
   height: 100%;
-  background-color: ${({ color }) => (color || '#FFFFFF')};
+  background-color: ${({ color }) => (color || '#FFF')};
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 `;
@@ -24,8 +24,15 @@ const ProfilePhoto = styled.Image`
   border-radius: 20px;
 `;
 
+const TextProfile = styled.Text`
+  font-size: ${({ size }) => (size || 14)};
+  font-family: ${({ family }) => (family || 'InterRegular')};
+  color: #666;
+`
+
 export {
   Card, 
   CategoryColor, 
-  ProfilePhoto
+  ProfilePhoto,
+  TextProfile
 };

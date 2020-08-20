@@ -3,11 +3,12 @@ import React from 'react';
 import {
   Card, 
   CategoryColor, 
-  ProfilePhoto
+  ProfilePhoto,
+  TextProfile
 } from './style';
 import Icon from '../Icon';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
 function ServiceCard({ color, photoURL, name, occupation, trash }) {
   return (
@@ -19,16 +20,22 @@ function ServiceCard({ color, photoURL, name, occupation, trash }) {
       />
 
       <View style={styles.texts}>
-        <Text style={styles.name}>
+        <TextProfile 
+          size={11}
+          family="InterMedium"
+        >
           { name }
-        </Text>
+        </TextProfile>
         
-        <Text style={styles.occupation}>
+        <TextProfile 
+          size={11}
+          family="InterMedium"
+        >
           { occupation }
-        </Text>
+        </TextProfile>
       </View>
 
-      <View style={styles.icon}>
+      <TouchableOpacity style={styles.icon}>
         { trash &&
           (<Icon
             lib="Feather"
@@ -37,7 +44,7 @@ function ServiceCard({ color, photoURL, name, occupation, trash }) {
             color="#DADADA"
           />)
         }
-      </View>
+      </TouchableOpacity>
     </Card>
   );
 }
@@ -55,16 +62,6 @@ const styles = StyleSheet.create({
   },
   texts: {
     flexGrow: 1
-  },
-  name: {
-    fontSize: 16,
-    fontFamily: "InterSemiBold",
-    color: "#666"
-  },
-  occupation: {
-    fontSize: 11,
-    fontFamily: "InterMedium",
-    color: "#666"
   },
   icon: {
     padding: 15
