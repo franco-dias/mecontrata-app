@@ -33,7 +33,7 @@ function SpotlightCard({
       </Row>
       <Row>
         <Icon
-          lib="MaterialDesign"
+          lib="MaterialCommunityDesign"
           iconName="briefcase-outline"
           size={20}
           color={colorIcon}
