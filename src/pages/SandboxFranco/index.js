@@ -14,51 +14,22 @@ const Sandbox = ({ navigation }) => {
   const [selectValue, setSelectValue] = useState('');
   const [photos, setPhotos] = useState([]);
   return (
-    <KeyboardAvoidingView style={{ flex: 1, alignItems: 'center', padding: 24 }}>
+    <KeyboardAvoidingView style={{
+      flex: 1,
+      paddingTop: 72,
+      paddingBottom: 16,
+      paddingHorizontal: 24,
+    }}
+    >
       <PageHeader navigation={navigation} />
-      <Typography variant="subtitle">
-        Inputs
+      <Typography variant="title">
+        Pesquisar
       </Typography>
       <Input
         value={value}
         onChangeText={setValue}
-        iconName="person"
-      />
-      <Select
-        options={[
-          { label: 'Monte Carmelo', value: 'monte-carmelo' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-          { label: 'Uberlândia', value: 'uberlandia' },
-        ]}
-        value={selectValue}
-        onChange={setSelectValue}
-        placeholder="Selecione uma cidade"
-      />
-      <Typography variant="subtitle">
-        Uploads
-      </Typography>
-      <PhotoUpload
-        size={256}
-        photo={photo}
-        setPhoto={setPhoto}
-      />
-      <PhotoUploadList
-        size={128}
-        photos={photos}
-        setPhotos={setPhotos}
-        limit={5}
+        iconName="search"
+        placeholder="Digite para pesquisar"
       />
     </KeyboardAvoidingView>
   );
