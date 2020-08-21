@@ -10,6 +10,7 @@ function TextArea({ placeHolder, onChangeText }) {
       multiline
       style={{
         textAlignVertical: 'top',
+        paddingLeft: 24,
       }}
       onChangeText={onChangeText}
       placeholder={placeHolder}
