@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Card = styled.View`
-  width: 364px;
+  width: 100%;
   height: 68px;
   flex-direction: row; 
   align-items:center;
