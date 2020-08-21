@@ -7,6 +7,7 @@ const Icon = ({
   color,
 }) => {
   const MaterialIcon = lazy(() => import('react-native-vector-icons/MaterialIcons'));
+  const MaterialCommunityIcon = lazy(() => import('react-native-vector-icons/MaterialCommunityIcons'));
   const AntDesignIcon = lazy(() => import('react-native-vector-icons/AntDesign'));
   const FontAwesomeIcon = lazy(() => import('react-native-vector-icons/FontAwesome'));
   const Ionicon = lazy(() => import('react-native-vector-icons/Ionicons'));
@@ -16,6 +17,8 @@ const Icon = ({
     switch (lib) {
       case 'MaterialDesign':
         return <MaterialIcon name={iconName} size={size} color={color} />;
+      case 'MaterialCommunityDesign':
+        return <MaterialCommunityIcon name={iconName} size={size} color={color} />;
       case 'AntDesign':
         return <AntDesignIcon name={iconName} size={size} color={color} />;
       case 'FontAwesome':
@@ -27,7 +30,7 @@ const Icon = ({
       default:
         return null;
     }
-  }, [lib, iconName]);
+  }, [lib, iconName, color]);
 
   return (
     <Suspense fallback={null}>
