@@ -24,7 +24,7 @@ const Icon = ({
       default:
         return null;
     }
-  }, [lib, iconName]);
+  }, [lib, iconName, color]);
 
   return (
     <Suspense fallback={null}>
