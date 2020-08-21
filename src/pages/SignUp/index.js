@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
 
 import PhotoUpload from '../../components/PhotoUpload';
 import Input from '../../components/Input';
