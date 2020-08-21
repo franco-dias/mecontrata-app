@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import SandboxRonaldo from '../pages/SandboxRonaldo';
 import SandboxJoao from '../pages/SandboxJoao';
 import SandboxFranco from '../pages/SandboxFranco';
+import SandboxEmmanuel from '../pages/SandboxEmmanuel';
 
 import Dashboard from '../pages/Dashboard';
 import SignUp from '../pages/SignUp';
@@ -18,6 +19,7 @@ const AppRoutes = () => (
     <AppStack.Screen name="SignUp" component={SignUp} />
     <AppStack.Screen name="SandboxJoao" component={SandboxJoao} />
     <AppStack.Screen name="SandboxFranco" component={SandboxFranco} />
+    <AppStack.Screen name="SandboxEmmanuel" component={SandboxEmmanuel} />
   </AppStack.Navigator>
 );
 

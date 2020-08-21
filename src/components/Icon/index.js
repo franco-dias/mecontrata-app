@@ -10,6 +10,7 @@ const Icon = ({
   const AntDesignIcon = lazy(() => import('react-native-vector-icons/AntDesign'));
   const FontAwesomeIcon = lazy(() => import('react-native-vector-icons/FontAwesome'));
   const Ionicon = lazy(() => import('react-native-vector-icons/Ionicons'));
+  const Feather = lazy(() => import('react-native-vector-icons/Feather'));
 
   const handleIconName = useCallback(() => {
     switch (lib) {
@@ -21,6 +22,8 @@ const Icon = ({
         return <FontAwesomeIcon name={iconName} size={size} color={color} />;
       case 'Ionic':
         return <Ionicon name={iconName} size={size} color={color} />;
+      case 'Feather':
+        return <Feather name={iconName} size={size} color={color} />;
       default:
         return null;
     }
