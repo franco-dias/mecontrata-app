@@ -2,9 +2,9 @@ import React from 'react';
 
 import { ButtonContainer, ButtonText } from './style';
 
-function Button({ label }) {
+function Button({ label, ...props }) {
   return (
-    <ButtonContainer>
+    <ButtonContainer {...props}>
       <ButtonText>
         {label}
       </ButtonText>
