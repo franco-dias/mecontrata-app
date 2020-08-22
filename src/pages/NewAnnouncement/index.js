@@ -11,8 +11,8 @@ import {
   ButtonWrapper,
 } from './style';
 
+import withLayout from '../../components/Layout/withLayout';
 import Typography from '../../components/Typography';
-import PageHeader from '../../components/PageHeader';
 import Select from '../../components/Select';
 import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
@@ -27,10 +27,9 @@ const NewAnnouncement = ({ navigation }) => {
   return (
     <Container>
       <PageContent>
-        <PageHeader navigation={navigation} />
         <TitleWrapper>
           <Typography variant="title">
-            Novo anúncio
+            Oferecer um serviço
           </Typography>
         </TitleWrapper>
 
@@ -55,7 +54,7 @@ const NewAnnouncement = ({ navigation }) => {
             Fotos
           </Typography>
           <Typography variant="text">
-            Envie fotos de trabalhos passados
+            Envie até 5 fotos do seu trabalho
           </Typography>
         </PhotoWrapper>
 
@@ -80,4 +79,4 @@ const NewAnnouncement = ({ navigation }) => {
   );
 };
 
-export default NewAnnouncement;
+export default withLayout(NewAnnouncement);

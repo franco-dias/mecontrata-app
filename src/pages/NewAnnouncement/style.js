@@ -6,7 +6,6 @@ const Container = styled.SafeAreaView`
 
 const PageContent = styled.ScrollView`
   flex: 1;
-  padding: 24px 24px 0;
 `;
 
 const TitleWrapper = styled.View`

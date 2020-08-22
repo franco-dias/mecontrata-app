@@ -1,5 +1,11 @@
 import React from 'react';
 
+import PageHeader from '../../components/PageHeader';
+import Typography from '../../components/Typography';
+import Icon from '../../components/Icon';
+import ServiceCard from '../../components/ServiceCard';
+import withLayout from '../../components/Layout/withLayout';
+
 import {
   Container,
   PageContent,
@@ -8,15 +14,8 @@ import {
   CardWrapper,
 } from './style';
 
-import PageHeader from '../../components/PageHeader';
-import Typography from '../../components/Typography';
-import Icon from '../../components/Icon';
-import ServiceCard from '../../components/ServiceCard';
-
 const MyServices = ({ navigation }) => (
   <Container>
-    <PageHeader navigation={navigation} />
-
     <TitleWrapper>
       <Typography variant="title">
         Meus serviços
@@ -51,4 +50,4 @@ const MyServices = ({ navigation }) => (
   </Container>
 );
 
-export default MyServices;
+export default withLayout(MyServices);

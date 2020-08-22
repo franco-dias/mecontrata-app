@@ -2,10 +2,6 @@ import styled from 'styled-components/native';
 
 const Container = styled.View`
   justify-content: space-between;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   flex-direction: row;
   height: 40px;
 `;

@@ -13,7 +13,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
 
-function SignIn() {
+function SignIn({ navigation }) {
   return (
     <Container>
       <LogoWrapper>
@@ -36,7 +36,7 @@ function SignIn() {
           <Button label="Cadastrar" />
         </InputWrapper>
         <LinkContainer>
-          <LinkText> Já tenho cadastro </LinkText>
+          <LinkText onPress={() => navigation.navigate('SignUp')}> Criar uma conta </LinkText>
         </LinkContainer>
       </FormWrapper>
     </Container>

@@ -9,9 +9,7 @@ const Row = styled.View`
 
 const Container = styled.KeyboardAvoidingView`
   flex: 1;
-  align-items: center;
-  padding: 24px;
-  padding-top: 84px;
+  margin-top: 12px;
 `;
 
 const Col = styled.View`

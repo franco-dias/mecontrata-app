@@ -11,19 +11,36 @@ import Dashboard from '../pages/Dashboard';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
 import CustomDrawer from './CustomDrawer';
+import MyServices from '../pages/MyServices';
+import NewAnnouncement from '../pages/NewAnnouncement';
 
 const AppStack = createDrawerNavigator();
 
 const AppRoutes = () => (
   <AppStack.Navigator drawerType="slide" drawerContent={(props) => <CustomDrawer {...props} />}>
-    <AppStack.Screen name="AdService" component={AdService} />
     <AppStack.Screen name="Dashboard" component={Dashboard} />
+    <AppStack.Screen name="MyServices" component={MyServices} />
+    <AppStack.Screen name="NewAnnouncement" component={NewAnnouncement} />
+    <AppStack.Screen
+      name="SignUp"
+      component={SignUp}
+      options={{
+        gestureEnabled: false,
+        swipeEnabled: false,
+      }}
+    />
+    <AppStack.Screen
+      name="SignIn"
+      component={SignIn}
+      options={{
+        gestureEnabled: false,
+        swipeEnabled: false,
+      }}
+    />
     <AppStack.Screen name="SandboxRonaldo" component={SandboxRonaldo} />
     <AppStack.Screen name="SandboxJoao" component={SandboxJoao} />
     <AppStack.Screen name="SandboxFranco" component={SandboxFranco} />
     <AppStack.Screen name="SandboxEmmanuel" component={SandboxEmmanuel} />
-    <AppStack.Screen name="SignUp" component={SignUp} />
-    <AppStack.Screen name="SignIn" component={SignIn} />
   </AppStack.Navigator>
 );
 

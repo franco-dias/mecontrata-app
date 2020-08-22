@@ -1,15 +1,14 @@
 import React from 'react';
 import {
-  View, Text, Alert,
+  View,
+  Text,
 } from 'react-native';
+import withLayout from '../../components/Layout/withLayout';
 
-const DashboardPage = () => {
-  Alert.alert('Dashboard', '.');
-  return (
-    <View>
-      <Text> Teste de texto </Text>
-    </View>
-  );
-};
+const DashboardPage = () => (
+  <View>
+    <Text> Teste de texto </Text>
+  </View>
+);
 
-export default DashboardPage;
+export default withLayout(DashboardPage);

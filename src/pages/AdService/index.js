@@ -1,6 +1,4 @@
 import React from 'react';
-import { KeyboardAvoidingView } from 'react-native';
-import PageHeader from '../../components/PageHeader';
 
 import {
   Container,
@@ -13,13 +11,13 @@ import {
 import Typography from '../../components/Typography';
 import Button from '../../components/Button';
 import Icon from '../../components/Icon';
+import withLayout from '../../components/Layout/withLayout';
 
 function AdService({
   navigation,
 }) {
   return (
     <Container>
-      <PageHeader navigation={navigation} />
       <Row>
         <UserPhoto source={{ uri: 'https://avatars3.githubusercontent.com/u/33707685?s=60&v=4' }} />
         <Col>
@@ -60,4 +58,4 @@ function AdService({
   );
 }
 
-export default AdService;
+export default withLayout(AdService);
