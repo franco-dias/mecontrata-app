@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import withLayout from '../../components/Layout/withLayout';
 import AdService from '../AdService';
 
 const SandboxRonaldo = () => (
@@ -12,4 +13,4 @@ const SandboxRonaldo = () => (
   />
 );
 
-export default SandboxRonaldo;
+export default withLayout(SandboxRonaldo);

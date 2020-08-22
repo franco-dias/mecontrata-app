@@ -14,7 +14,7 @@ import {
   LinkText,
 } from './style';
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
   return (
     <Container>
@@ -64,7 +64,7 @@ const SignUp = () => {
           <Button label="Cadastrar" />
         </InputWrapper>
         <LinkContainer>
-          <LinkText> Já tenho cadastro </LinkText>
+          <LinkText onPress={() => navigation.navigate('SignIn')}> Já tenho cadastro </LinkText>
         </LinkContainer>
       </PageContent>
     </Container>

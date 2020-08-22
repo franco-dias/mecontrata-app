@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 const Row = styled.View`
   flex-direction: row;
@@ -7,15 +7,20 @@ const Row = styled.View`
   padding-bottom: 24px;
 `;
 
+const Container = styled.KeyboardAvoidingView`
+  flex: 1;
+  margin-top: 12px;
+`;
+
 const Col = styled.View`
   flex-direction: column;
   flex: 1;
 `;
 
 const UserPhoto = styled.Image`
-  width: 38px;
-  height: 38px;
-  border-radius: 23px;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
   margin-right: 18px;
 `;
 
@@ -27,6 +32,7 @@ const UsernameAndIcon = styled.View`
 `;
 
 export {
+  Container,
   Row,
   Col,
   UserPhoto,

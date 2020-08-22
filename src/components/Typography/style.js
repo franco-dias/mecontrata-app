@@ -5,17 +5,17 @@ const textStyles = {
   title: css`
     font-size: 30px;
     font-family: InterSemiBold;
-    color: ${({ color }) => (color || '#000')} ;
+    color: ${({ color }) => (color || '#333951')} ;
   `,
   subtitle: css`
     font-size: 18px;
     font-family: InterSemiBold;
-    color: ${({ color }) => (color || '#000')} ;
+    color: ${({ color }) => (color || '#333951')} ;
   `,
   text: css`
     font-size: 14px;
     font-family: InterRegular;
-    color: ${({ color }) => (color || '#000')} ;
+    color: ${({ color }) => (color || '#333951')} ;
   `,
 };
 
