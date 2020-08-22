@@ -21,7 +21,6 @@ const textStyles = {
 
 const Text = styled.Text`
   ${({ variant }) => textStyles[variant]}
-  width: 252px;
 `;
 
 export { Text };
