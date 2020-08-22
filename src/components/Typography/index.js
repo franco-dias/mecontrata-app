@@ -3,7 +3,7 @@ import { Text } from './style';
 
 function Typography({ variant, children, color }) {
   return (
-    <Text variant={variant} color={color}>
+    <Text variant={variant} color={color} numberOfLines={1}>
       {children}
     </Text>
   );
