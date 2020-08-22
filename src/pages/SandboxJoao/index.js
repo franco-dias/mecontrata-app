@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
 } from 'react-native';
 import CategoryCard from '../../components/CategoryCard';
 import TextArea from '../../components/TextArea';
