@@ -4,7 +4,8 @@ import {
   Container,
   PageContent,
   TitleWrapper,
-  SelectWrapper,
+  CategoryWrapper,
+  ServiceWrapper,
   TextAreaWrapper,
   PhotoWrapper,
   PhotoUploadWrapper,
@@ -33,17 +34,30 @@ const NewAnnouncement = ({ navigation }) => {
           </Typography>
         </TitleWrapper>
 
-        <SelectWrapper>
+        <CategoryWrapper>
           <Select
             options={[
-              { label: 'Monte Carmelo', value: 'monte-carmelo' },
-              { label: 'Uberlândia', value: 'uberlandia' },
+              { label: 'Comercio', value: 'Comercio' },
+              { label: 'Cívil', value: 'civil' },
             ]}
             value={selectValue}
             onChange={setSelectValue}
-            placeholder="Selecione uma cidade"
+            placeholder="Categoria"
           />
-        </SelectWrapper>
+
+        </CategoryWrapper>
+
+        <ServiceWrapper>
+          <Select
+            options={[
+              { label: 'Bebidas', value: 'bebidas' },
+              { label: 'Restaurante', value: 'restaurante' },
+            ]}
+            value={selectValue}
+            onChange={setSelectValue}
+            placeholder="Serviço"
+          />
+        </ServiceWrapper>
 
         <TextAreaWrapper>
           <TextArea placeHolder="Descrição" onChangeText={setText} />
