@@ -11,10 +11,5 @@ const formDataApi = axios.create({
   },
 });
 
-formDataApi.interceptors.request.use((config) => {
-  console.log(config.headers);
-  return config;
-});
-
 export default api;
 export { formDataApi };
