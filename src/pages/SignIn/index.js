@@ -29,7 +29,7 @@ function SignIn({ navigation }) {
         <Logo />
       </LogoWrapper>
       <Formik
-        initialValues={{ email: 'gabrielfdg10@gmail.com', password: 'g12081997' }}
+        initialValues={{ email: 'ronaldo.alves.1997@gmail.com', password: '12345678' }}
         onSubmit={onSubmit}
       >
         {({
