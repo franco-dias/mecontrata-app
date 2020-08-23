@@ -58,18 +58,6 @@ const CustomDrawer = ({ navigation }) => {
               </>
             )
           }
-          <MenuItem onPress={() => navigation.navigate('SandboxFranco')}>
-            <Typography variant="subtitle"> Sandbox Franco </Typography>
-          </MenuItem>
-          <MenuItem onPress={() => navigation.navigate('SandboxRonaldo')}>
-            <Typography variant="subtitle"> Sandbox Ronaldo </Typography>
-          </MenuItem>
-          <MenuItem onPress={() => navigation.navigate('SandboxEmmanuel')}>
-            <Typography variant="subtitle"> Sandbox Emmanuel </Typography>
-          </MenuItem>
-          <MenuItem onPress={() => navigation.navigate('SandboxJoao')}>
-            <Typography variant="subtitle"> Sandbox João </Typography>
-          </MenuItem>
         </View>
         {authenticated && (
         <MenuItem onPress={() => {
