@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from 'formik';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -15,10 +16,10 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
 
-function SignIn({ navigation }) {
+function SignIn() {
+  const navigation = useNavigation();
   const { signIn, authenticated } = useAuth();
 
-  console.log({ authenticated });
   const onSubmit = ({ email, password }) => {
     signIn({ email, password });
   };

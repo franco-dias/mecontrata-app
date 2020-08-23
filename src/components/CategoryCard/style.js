@@ -5,7 +5,7 @@ const Card = styled.View`
   height: 68px;
   flex-direction: row; 
   align-items:center;
-  background: #FFFFFF;
+  background-color:#FFF;
   border-radius: 5px;
 `;
 
