@@ -2,6 +2,7 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Dashboard from '../pages/Dashboard';
+import AdService from '../pages/AdService';
 import MyServices from '../pages/MyServices';
 import NewAnnouncement from '../pages/NewAnnouncement';
 import CustomDrawer from './CustomDrawer';
@@ -16,6 +17,8 @@ const AuthRoutes = () => (
     <AppStack.Screen name="Dashboard" component={Dashboard} />
     <AppStack.Screen name="MyServices" component={MyServices} />
     <AppStack.Screen name="NewAnnouncement" component={NewAnnouncement} />
+    <AppStack.Screen name="AdService" component={AdService} />
+
   </AppStack.Navigator>
 
 );

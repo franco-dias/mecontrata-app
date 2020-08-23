@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import { Image } from 'react-native';
 import {
   Container,
   Row,
@@ -18,7 +18,7 @@ import Announcement from '../../resources/announcement';
 function AdService({
   adId,
 }) {
-  const [adData, setAdData] = useState(null);
+  const [adData, setAdData] = useState({});
   const getAdData = useCallback(async (id) => {
     Announcement.getOne(id)
       .then((data) => setAdData(data))
@@ -26,36 +26,28 @@ function AdService({
   }, [Announcement]);
 
   useEffect(() => {
-    getAdData(adId);
-    console.log(adData);
+    getAdData(2);
   }, []);
 
   return (
     <Container>
       <Row>
-        <UserPhoto source={{ uri: 'https://avatars3.githubusercontent.com/u/33707685?s=60&v=4' }} />
+        <UserPhoto source={{ uri: `http://10.0.2.2/${adData.user?.avatar.url}` }} />
         <Col>
           <UsernameAndIcon>
             <Typography variant="title" color="#333951">
-              Ronaldo Alves
+              {adData.user?.name}
             </Typography>
             <Icon lib="AntDesign" iconName="like2" color="#000" size={20} />
           </UsernameAndIcon>
           <Typography variant="subtitle" color="#333951">
-            Carpinteiro
+            {adData.category?.description}
           </Typography>
         </Col>
       </Row>
       <Row>
         <Typography variant="text" color="#333951">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit
-          esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum.
+          {adData.description}
         </Typography>
       </Row>
 
@@ -64,7 +56,14 @@ function AdService({
           Fotos
         </Typography>
       </Row>
-
+      {adData.photos?.map((p, idx) => (
+        <Image
+          width={100}
+          height={100}
+          key={idx}
+          source={{ uri: `http://10.0.2.2/${p.url}` }}
+        />
+      ))}
       <Row>
         <Button label="Entrar em contato" />
       </Row>
