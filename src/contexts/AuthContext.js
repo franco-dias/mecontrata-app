@@ -44,7 +44,6 @@ const AuthProvider = ({ children }) => {
       ]);
       setAuthData(user, token);
     } catch (e) {
-      console.log(e);
     }
   };
 

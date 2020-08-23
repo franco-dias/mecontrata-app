@@ -24,8 +24,6 @@ function SignIn() {
     signIn({ email, password });
   };
 
-  console.log({ authenticated });
-
   return (
     <Container>
       <LogoWrapper>

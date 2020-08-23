@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 
+// import * as yup from 'yup';
 import PhotoUpload from '../../components/PhotoUpload';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
@@ -17,6 +18,21 @@ import {
   LinkText,
 } from './style';
 
+// const validationSchema = yup.object().shape({
+//   name: yup.string().required(),
+//   email: yup.string().required(),
+//   password: yup.string().required(),
+//   confirmPassword: yup.string().when('password', {
+//     is: (password) => Boolean(password),
+//     then: yup.string().required(),
+
+//   }),
+//   phoneNumber: yup.string().required(),
+//   state: yup.string().required(),
+//   city: yup.string().required(),
+//   job: yup.string().required(),
+// });
+
 const SignUp = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
 
@@ -29,13 +45,15 @@ const SignUp = ({ navigation }) => {
 
     data.append('avatar', {
       uri: photo.uri,
-      type: 'image/jpeg',
-      name: 'test.jpg',
+      type: photo.type,
+      name: photo.fileName,
     });
 
+    data.append('data', JSON.stringify(values));
+
     formDataApi.post('/user', data)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error.response));
+      .then(() => navigation.navigate('SignIn'))
+      .catch((error) => console.log(JSON.stringify(error, null, 1)));
   };
 
   return (
@@ -49,7 +67,9 @@ const SignUp = ({ navigation }) => {
           phoneNumber: '+5534999171345',
           state: 'Minas Gerais',
           city: 'Uberlândia',
+          job: 'Desenvolvedor',
         }}
+        // validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, values }) => (
           <PageContent>
@@ -87,10 +107,24 @@ const SignUp = ({ navigation }) => {
             </InputWrapper>
             <InputWrapper>
               <Input
+                iconName="vpn-key"
+                placeholder="Senha"
+                onChangeText={handleChange('password')}
+                secureTextEntry
+                value={values.confirmPassword}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
                 iconName="phone"
                 placeholder="Telefone"
                 onChangeText={handleChange('phoneNumber')}
                 value={values.phoneNumber}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Select
+                options={[]}
               />
             </InputWrapper>
             <InputWrapper>

@@ -7,8 +7,6 @@ import AuthRoutes from './auth.routes';
 const Routes = () => {
   const { authenticated } = useAuth();
 
-  console.log(authenticated);
-
   if (!authenticated) {
     return <AppRoutes />;
   }
