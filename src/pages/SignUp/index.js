@@ -20,18 +20,22 @@ import {
 const SignUp = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
 
-  const onSubmit = (values) => {
-    const formData = new FormData();
+  useEffect(() => {
+    console.log(photo);
+  }, [photo]);
 
-    formData.append('avatar', {
+  const onSubmit = (values) => {
+    const data = new FormData();
+
+    data.append('avatar', {
       uri: photo.uri,
-      type: photo.type,
-      name: photo.fileName,
+      type: 'image/jpeg',
+      name: 'test.jpg',
     });
 
-    formDataApi.post('/user', formData)
+    formDataApi.post('/user', data)
       .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.response));
   };
 
   return (
