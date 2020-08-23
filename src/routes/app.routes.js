@@ -18,9 +18,9 @@ const AppStack = createDrawerNavigator();
 
 const AppRoutes = () => (
   <AppStack.Navigator drawerType="slide" drawerContent={(props) => <CustomDrawer {...props} />}>
-    <AppStack.Screen name="Dashboard" component={Dashboard} />
+    {/* <AppStack.Screen name="Dashboard" component={Dashboard} />
     <AppStack.Screen name="MyServices" component={MyServices} />
-    <AppStack.Screen name="NewAnnouncement" component={NewAnnouncement} />
+    <AppStack.Screen name="NewAnnouncement" component={NewAnnouncement} /> */}
     <AppStack.Screen
       name="SignUp"
       component={SignUp}
@@ -37,10 +37,10 @@ const AppRoutes = () => (
         swipeEnabled: false,
       }}
     />
-    <AppStack.Screen name="SandboxRonaldo" component={SandboxRonaldo} />
+    {/* <AppStack.Screen name="SandboxRonaldo" component={SandboxRonaldo} />
     <AppStack.Screen name="SandboxJoao" component={SandboxJoao} />
     <AppStack.Screen name="SandboxFranco" component={SandboxFranco} />
-    <AppStack.Screen name="SandboxEmmanuel" component={SandboxEmmanuel} />
+    <AppStack.Screen name="SandboxEmmanuel" component={SandboxEmmanuel} /> */}
   </AppStack.Navigator>
 );
 
