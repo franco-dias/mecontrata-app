@@ -5,7 +5,6 @@ import withLayout from '../../components/Layout/withLayout';
 import ServiceCard from '../../components/ServiceCard';
 
 import Input from '../../components/Input';
-import IconButton from '../../components/IconButton';
 
 import {
   Container,
@@ -17,33 +16,22 @@ import {
 
 function MyServices({ navigation }) {
   const [value, setValue] = useState('');
+  const [services, setServices] = useState([]);
 
-  // const [payload, setPayload] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     let user = await AsyncStorage.getItem('@MeContrata/User');
-  //     user = JSON.parse(user);
-
-  //     const returnPayload = await api.get(`/ad/user/${user.id}?page=1&perPage=4`);
-  //     setPayload(returnPayload.data);
-  //   }
-
-  //   fetchData();
-  //   // api.get('/ad/user/:userId');
-  // }, []);
-
-  function searchServices() {
-    useEffect(() => {
-      api.get('/ad/search', {
+  useEffect(() => {
+    async function fetchData() {
+      const returnPayload = await api.get('/ad/search', {
         params: {
           s: value,
           page: 1,
           perPage: 5,
         },
       });
-    }, []);
-  }
+      setServices(returnPayload.data);
+    }
+
+    fetchData();
+  }, [value]);
 
   return (
     <Container>
@@ -57,8 +45,7 @@ function MyServices({ navigation }) {
         <Input
           iconName="search"
           value={value}
-          onChangeText={setValue}
-          onBlur={() => console.log('teste')}
+          onBlur={setValue}
         />
 
       </InputWrapper>
