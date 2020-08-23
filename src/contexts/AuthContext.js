@@ -6,14 +6,19 @@ import React, {
 } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import api from '../resources/api';
+import api, { formDataApi } from '../resources/api';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const setAuthData = (user, token) => {
+    console.log('setting token', token);
     api.interceptors.request.use((config) => {
+      config.headers.authorization = token;
+      return config;
+    });
+    formDataApi.interceptors.request.use((config) => {
       config.headers.authorization = token;
       return config;
     });
@@ -39,12 +44,11 @@ const AuthProvider = ({ children }) => {
       const { data } = await api.post('/session', { email, password });
       const { user, token } = data;
       await AsyncStorage.multiSet([
-        ['@MeContrata/Token', token],
+        ['@MeContrata/Token', `Bearer ${token}`],
         ['@MeContrata/User', JSON.stringify(user)],
       ]);
       setAuthData(user, token);
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 
   const signOut = async () => {
