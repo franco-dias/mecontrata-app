@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import {
   Container,
@@ -13,9 +13,23 @@ import Button from '../../components/Button';
 import Icon from '../../components/Icon';
 import withLayout from '../../components/Layout/withLayout';
 
+import Announcement from '../../resources/announcement';
+
 function AdService({
-  navigation,
+  adId,
 }) {
+  const [adData, setAdData] = useState(null);
+  const getAdData = useCallback(async (id) => {
+    Announcement.getOne(id)
+      .then((data) => setAdData(data))
+      .catch((error) => console.log(error));
+  }, [Announcement]);
+
+  useEffect(() => {
+    getAdData(adId);
+    console.log(adData);
+  }, []);
+
   return (
     <Container>
       <Row>
