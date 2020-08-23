@@ -21,8 +21,8 @@ const SignUp = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
 
   useEffect(() => {
-    console.log(photo);
-  }, [photo]);
+    navigation.closeDrawer();
+  }, []);
 
   const onSubmit = (values) => {
     const data = new FormData();

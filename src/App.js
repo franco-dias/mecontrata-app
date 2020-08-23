@@ -3,18 +3,18 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import AuthProvider from './contexts/AuthContext';
 
-import AppRoutes from './routes/app.routes';
+import Routes from './routes';
 import { SafeArea, AppView } from './style';
 
 const App = () => (
   <SafeArea>
-    <AuthProvider>
-      <NavigationContainer style={{ flex: 1 }}>
+    <NavigationContainer style={{ flex: 1 }}>
+      <AuthProvider>
         <AppView>
-          <AppRoutes />
+          <Routes />
         </AppView>
-      </NavigationContainer>
-    </AuthProvider>
+      </AuthProvider>
+    </NavigationContainer>
   </SafeArea>
 );
 

@@ -12,7 +12,6 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
-
   const setAuthData = (user, token) => {
     api.interceptors.request.use((config) => {
       config.headers.authorization = token;
