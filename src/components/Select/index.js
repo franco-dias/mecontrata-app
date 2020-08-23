@@ -73,7 +73,7 @@ const Select = ({
                 setModalVisible(false);
               }}
             >
-              <OptionText>
+              <OptionText small>
                 Limpar seleção
               </OptionText>
             </Option>
@@ -105,7 +105,7 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   error: PropTypes.string,
   placeholder: PropTypes.string,

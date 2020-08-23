@@ -12,8 +12,8 @@ const Container = styled.TouchableOpacity`
   background: rgba(0, 0, 0, .1);
   border-radius: 24px;
   border-width: 2px;
-  border-color: transparent;
   padding: 0 16px;
+  border-color: #cccccc;
   ${({ hasError }) => hasError && css`
     border-color: #FF0B0B;
   `}
@@ -40,19 +40,21 @@ const Icon = styled((props) => <GenericIcon {...props} />)`
 `;
 
 const Backdrop = styled.TouchableOpacity`
-  height: 100%;
   width: 100%;
+  height: 100%;
   z-index: 1;
 `;
 
 const OptionsContainer = styled.View`
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
+  border-width: 1px;
+  border-color: #eee;
   height: 80%;
   background: #fff;
   width: 100%;
   position: absolute;
-  padding: 24px 12px 12px;
+  padding: 24px;
   bottom: 0;
   z-index: 2;
 `;
@@ -68,9 +70,10 @@ const Option = styled.TouchableOpacity`
 `;
 
 const OptionText = styled.Text`
-  font-family: InterRegular;
+  font-family: InterSemiBold;
   color: #666;
-  font-size: 18px;
+  font-size: 14px;
+  ${({ small }) => small && css`font-size: 12px;`}
 `;
 
 const Title = styled(Typography)`
