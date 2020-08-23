@@ -12,8 +12,16 @@ const TitleWrapper = styled.View`
   padding-top: 25px;
 `;
 
-const SelectWrapper = styled.View`
+const CategoryWrapper = styled.View`
   padding-top: 35px;
+`;
+
+const ServiceWrapper = styled.View`
+  padding-top: 16px;
+`;
+
+const InputSelectWrapper = styled.View`
+  margin-top: 0;
 `;
 
 const TextAreaWrapper = styled.View`
@@ -36,7 +44,9 @@ export {
   Container,
   PageContent,
   TitleWrapper,
-  SelectWrapper,
+  CategoryWrapper,
+  ServiceWrapper,
+  InputSelectWrapper,
   TextAreaWrapper,
   PhotoWrapper,
   PhotoUploadWrapper,
