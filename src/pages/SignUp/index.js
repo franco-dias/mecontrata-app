@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 
-// import * as yup from 'yup';
+import * as yup from 'yup';
 import PhotoUpload from '../../components/PhotoUpload';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 
-import { formDataApi } from '../../resources/api';
+import api, { formDataApi } from '../../resources/api';
 
 import {
   UploadWrapper,
@@ -18,26 +18,34 @@ import {
   LinkText,
 } from './style';
 
-// const validationSchema = yup.object().shape({
-//   name: yup.string().required(),
-//   email: yup.string().required(),
-//   password: yup.string().required(),
-//   confirmPassword: yup.string().when('password', {
-//     is: (password) => Boolean(password),
-//     then: yup.string().required(),
-
-//   }),
-//   phoneNumber: yup.string().required(),
-//   state: yup.string().required(),
-//   city: yup.string().required(),
-//   job: yup.string().required(),
-// });
+const validationSchema = yup.object().shape({
+  name: yup.string().required('Campo obrigatório'),
+  email: yup.string().email('Deve ser um e-mail válido').required('Campo obrigatório'),
+  password: yup.string().required('Campo obrigatório').min(8, 'No mínimo 8 caracteres.'),
+  confirmPassword: yup.string()
+    .oneOf([yup.ref('password'), null], 'As senhas devem ser iguais')
+    .required('Campo obrigatório'),
+  phoneNumber: yup.string().required('Campo obrigatório'),
+  state: yup.string().required('Campo obrigatório'),
+  city: yup.string('Campo obrigatório').required('Campo obrigatório').nullable(),
+});
 
 const SignUp = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
+  const [locations, setLocations] = useState([]);
+
+  const getLocations = async () => {
+    try {
+      const { data } = await api.get('/states/list');
+      setLocations(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     navigation.closeDrawer();
+    getLocations();
   }, []);
 
   const onSubmit = (values) => {
@@ -60,91 +68,105 @@ const SignUp = ({ navigation }) => {
     <Container>
       <Formik
         onSubmit={onSubmit}
-        initialValues={{
-          name: 'Franco',
-          email: 'franco@teste.com',
-          password: 'g12081997',
-          phoneNumber: '+5534999171345',
-          state: 'Minas Gerais',
-          city: 'Uberlândia',
-          job: 'Desenvolvedor',
-        }}
-        // validationSchema={validationSchema}
+        initialValues={{}}
+        validationSchema={validationSchema}
+        validateOnBlur={false}
+        validateOnChange
       >
-        {({ handleChange, handleSubmit, values }) => (
-          <PageContent>
-            <UploadWrapper>
-              <PhotoUpload
-                size={256}
-                photo={photo}
-                setPhoto={setPhoto}
-              />
-            </UploadWrapper>
-            <InputWrapper>
-              <Input
-                iconName="person"
-                placeholder="Nome completo"
-                onChangeText={handleChange('name')}
-                value={values.name}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Input
-                iconName="mail-outline"
-                placeholder="E-mail"
-                onChangeText={handleChange('email')}
-                value={values.email}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Input
-                iconName="vpn-key"
-                placeholder="Senha"
-                onChangeText={handleChange('password')}
-                secureTextEntry
-                value={values.password}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Input
-                iconName="vpn-key"
-                placeholder="Senha"
-                onChangeText={handleChange('password')}
-                secureTextEntry
-                value={values.confirmPassword}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Input
-                iconName="phone"
-                placeholder="Telefone"
-                onChangeText={handleChange('phoneNumber')}
-                value={values.phoneNumber}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Select
-                options={[]}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Select
-                options={[]}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Select
-                options={[]}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Button onPress={handleSubmit} label="Cadastrar" />
-            </InputWrapper>
-            <LinkContainer>
-              <LinkText onPress={() => navigation.navigate('SignIn')}> Já tenho cadastro </LinkText>
-            </LinkContainer>
-          </PageContent>
-        )}
+        {({
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          values,
+          errors,
+        }) => {
+          console.log(errors);
+          return (
+            <PageContent>
+              <UploadWrapper>
+                <PhotoUpload
+                  size={192}
+                  photo={photo}
+                  setPhoto={setPhoto}
+                />
+              </UploadWrapper>
+              <InputWrapper>
+                <Input
+                  iconName="person"
+                  placeholder="Nome completo"
+                  onChangeText={handleChange('name')}
+                  value={values.name}
+                  error={errors.name}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Input
+                  iconName="mail-outline"
+                  placeholder="E-mail"
+                  onChangeText={handleChange('email')}
+                  value={values.email}
+                  error={errors.email}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Input
+                  iconName="vpn-key"
+                  placeholder="Senha"
+                  onChangeText={handleChange('password')}
+                  secureTextEntry
+                  value={values.password}
+                  error={errors.password}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Input
+                  iconName="vpn-key"
+                  placeholder="Senha"
+                  onChangeText={handleChange('confirmPassword')}
+                  secureTextEntry
+                  value={values.confirmPassword}
+                  error={errors.confirmPassword}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Input
+                  iconName="phone"
+                  placeholder="Telefone"
+                  onChangeText={handleChange('phoneNumber')}
+                  value={values.phoneNumber}
+                  error={errors.phoneNumber}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Select
+                  options={locations}
+                  placeholder="Selecione um estado"
+                  value={values.state}
+                  error={errors.state}
+                  onChange={(value) => {
+                    setFieldValue('state', value);
+                    setFieldValue('city', null);
+                  }}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Select
+                  options={locations.find((item) => item.value === values.state)?.cities}
+                  placeholder="Selecione uma cidade"
+                  value={values.city}
+                  error={errors.city}
+                  onChange={(value) => setFieldValue('city', value)}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <Button onPress={handleSubmit} label="Cadastrar" />
+              </InputWrapper>
+              <LinkContainer>
+                <LinkText onPress={() => navigation.navigate('SignIn')}> Já tenho cadastro </LinkText>
+              </LinkContainer>
+            </PageContent>
+          );
+        }}
       </Formik>
     </Container>
   );

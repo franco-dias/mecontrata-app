@@ -31,10 +31,15 @@ const UsernameAndIcon = styled.View`
   justify-content: space-between;
 `;
 
+const ButtonContainer = styled.View`
+  margin-top: 24px;
+`;
+
 export {
   Container,
   Row,
   Col,
   UserPhoto,
   UsernameAndIcon,
+  ButtonContainer,
 };

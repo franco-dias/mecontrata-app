@@ -16,16 +16,23 @@ import {
 } from './style';
 
 const CustomDrawer = ({ navigation }) => {
-  const { authenticated, signOut } = useAuth();
-
+  const { authenticated, signOut, userData } = useAuth();
   return (
     <DrawerContainer>
       <HeaderRow>
         <UserInfo>
-          <UserImage />
+          <UserImage
+            source={{
+              uri: `http://10.0.2.2:3333/${userData?.avatar.url}`,
+            }}
+          />
           <View>
-            <UserName> John Doe </UserName>
-            <UserEmail> john.doe@example.com </UserEmail>
+            <UserName>
+              { userData?.name || 'Convidado' }
+            </UserName>
+            <UserEmail>
+              { userData?.email || '' }
+            </UserEmail>
           </View>
         </UserInfo>
       </HeaderRow>

@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Field, Icon } from './style';
+import {
+  Container, Field, Icon, Error,
+} from './style';
 
 const Input = ({
   error,
@@ -14,22 +16,29 @@ const Input = ({
   const iconColor = useMemo(() => (isFocused ? '#6C6CE5' : hasError ? '#FF0B0B' : '#666'), [isFocused, hasError]);
 
   return (
-    <Container
-      isFocused={isFocused}
-      hasError={hasError}
-    >
-      <Field
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        {...props}
-      />
-      <Icon
-        lib="MaterialDesign"
-        iconName={hasError ? 'error' : iconName}
-        size={24}
-        color={iconColor}
-      />
-    </Container>
+    <>
+      <Container
+        isFocused={isFocused}
+        hasError={hasError}
+      >
+        <Field
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          {...props}
+        />
+        <Icon
+          lib="MaterialDesign"
+          iconName={hasError ? 'error' : iconName}
+          size={24}
+          color={iconColor}
+        />
+      </Container>
+      {hasError && (
+        <Error>
+          {error}
+        </Error>
+      )}
+    </>
   );
 };
 

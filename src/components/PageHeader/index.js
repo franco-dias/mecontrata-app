@@ -13,7 +13,7 @@ const PageHeader = ({ navigation }) => (
       </IconButton>
     </MenuButton>
     <SearchButton>
-      <IconButton>
+      <IconButton onPress={() => navigation.navigate('SearchServices')}>
         <Icon lib="MaterialDesign" iconName="search" size={24} color="#666" />
       </IconButton>
     </SearchButton>

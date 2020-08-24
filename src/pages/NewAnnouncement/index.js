@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Formik } from 'formik';
+import * as yup from 'yup';
 
 import withLayout from '../../components/Layout/withLayout';
 import Typography from '../../components/Typography';
@@ -8,22 +9,29 @@ import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
 import PhotoUploadList from '../../components/PhotoUploadList';
 import api, { formDataApi } from '../../resources/api';
+import capitalizeWords from '../../utils/capitalizeWords';
 
 import {
   Container,
   PageContent,
   TitleWrapper,
-  CategoryWrapper,
-  ServiceWrapper,
+  InputSelectWrapper,
   TextAreaWrapper,
   PhotoWrapper,
   PhotoUploadWrapper,
   ButtonWrapper,
 } from './style';
 
+const validationSchema = yup.object().shape({
+  categoryId: yup.number('Campo obrigatório').required('Campo obrigatório'),
+  jobId: yup.number('Campo obrigatório').required('Campo obrigatório'),
+  description: yup.string().required('Campo obrigatório'),
+});
+
 const NewAnnouncement = ({ navigation }) => {
   const [photos, setPhotos] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [jobs, setJobs] = useState([]);
 
   const onSubmit = (values) => {
     const formData = new FormData();
@@ -38,7 +46,7 @@ const NewAnnouncement = ({ navigation }) => {
     formData.append('data', JSON.stringify(values));
 
     formDataApi.post('/ad', formData)
-      .then((response) => console.log(response))
+      .then(() => navigation.navigate('Dashboard'))
       .catch((err) => console.log(err));
   };
 
@@ -48,9 +56,26 @@ const NewAnnouncement = ({ navigation }) => {
   }, []);
 
   const categoryOptions = useMemo(
-    () => categories.map((category) => ({ label: category.description, value: category.id })),
+    () => categories.map((category) => ({
+      label: capitalizeWords(category.description),
+      value: category.id,
+    })),
     [categories],
   );
+
+  const jobOptions = useMemo(
+    () => jobs.map((job) => ({ label: job.description, value: job.id })),
+  );
+
+  const getJobs = async (id) => {
+    if (!id) setJobs([]);
+    try {
+      const { data } = await api.get(`/category/${id}`);
+      setJobs(data.jobs || []);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
@@ -62,30 +87,43 @@ const NewAnnouncement = ({ navigation }) => {
         </TitleWrapper>
         <Formik
           onSubmit={onSubmit}
-          initialValues={{
-            categoryId: null,
-            description: '',
-          }}
+          validationSchema={validationSchema}
+          initialValues={{}}
         >
           {({
             handleChange,
             setFieldValue,
             handleSubmit,
             values,
+            errors,
           }) => (
             <>
-              <SelectWrapper>
+              <InputSelectWrapper>
                 <Select
                   options={categoryOptions}
                   value={values.categoryId}
-                  onChange={(value) => setFieldValue('categoryId', value)}
+                  onChange={(value) => {
+                    setFieldValue('categoryId', value);
+                    setFieldValue('jobId', -1);
+                    getJobs(value);
+                  }}
+                  error={errors.categoryId}
                   placeholder="Selecione uma categoria"
                 />
-              </SelectWrapper>
-
+              </InputSelectWrapper>
+              <InputSelectWrapper>
+                <Select
+                  options={jobOptions}
+                  value={values.jobId}
+                  error={errors.jobId}
+                  onChange={(value) => setFieldValue('jobId', value)}
+                  placeholder="Selecione uma profissão"
+                />
+              </InputSelectWrapper>
               <TextAreaWrapper>
                 <TextArea
                   value={values.description}
+                  error={errors.description}
                   placeHolder="Descrição"
                   onChangeText={handleChange('description')}
                 />

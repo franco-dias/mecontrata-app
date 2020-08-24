@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 
-import PageHeader from '../../components/PageHeader';
 import Typography from '../../components/Typography';
 import Icon from '../../components/Icon';
 import ServiceCard from '../../components/ServiceCard';
 import withLayout from '../../components/Layout/withLayout';
-
+import { useAuth } from '../../contexts/AuthContext';
+import capitalizeWords from '../../utils/capitalizeWords';
 import {
   Container,
   PageContent,
@@ -13,41 +14,78 @@ import {
   ServiceWrapper,
   CardWrapper,
 } from './style';
+import api from '../../resources/api';
 
-const MyServices = ({ navigation }) => (
-  <Container>
-    <TitleWrapper>
-      <Typography variant="title">
-        Meus serviços
-      </Typography>
-      <Icon lib="MaterialDesign" iconName="add" color="#000" size={20} />
-    </TitleWrapper>
+const MyServices = ({ navigation }) => {
+  const [services, setServices] = useState([]);
+  const { userData } = useAuth();
+  const getServices = useCallback(async () => {
+    try {
+      const response = await api.get(`/ad/user/${userData.id}`, {
+        params: {
+          page: 1,
+          perPage: 200,
+          orderBy: 'createdAt',
+          order: 'DESC',
+        },
+      });
+      setServices(response.data.list);
+    } catch (e) {
+      console.log(e);
+    }
 
-    <PageContent>
-      <ServiceWrapper>
-        <CardWrapper>
-          <ServiceCard
-            color="#D9D9F9"
-            photoURL="https://reactnative.dev/img/tiny_logo.png"
-            name="John Doe"
-            occupation="Eletricista - Uberlândia/MG"
-            trash
-          />
-        </CardWrapper>
+    return () => {};
+  }, [userData.id]);
 
-        <CardWrapper>
-          <ServiceCard
-            color="#D9D9F9"
-            photoURL="https://reactnative.dev/img/tiny_logo.png"
-            name="John Doe"
-            occupation="Eletricista - Uberlândia/MG"
-            trash
-          />
-        </CardWrapper>
-      </ServiceWrapper>
-    </PageContent>
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => getServices());
+    return unsubscribe;
+  }, [navigation, getServices]);
 
-  </Container>
-);
+  useEffect(() => {
+    if (userData.id) getServices();
+  }, [userData.id]);
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/ad/${id}`);
+      getServices();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    <Container>
+      <TitleWrapper>
+        <Typography variant="title">
+          Meus serviços
+        </Typography>
+        <TouchableOpacity onPress={() => navigation.navigate('NewAnnouncement')}>
+          <Icon lib="MaterialDesign" iconName="add" color="#000" size={20} />
+        </TouchableOpacity>
+      </TitleWrapper>
+
+      <PageContent>
+        <ServiceWrapper>
+          {services.map((service) => (
+            <CardWrapper key={service.id}>
+              <ServiceCard
+                color={service.category?.color}
+                url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
+                name={service.job?.description}
+                occupation={capitalizeWords(service.category?.description)}
+                trash
+                onPress={() => navigation.navigate('AdService', { id: service.id })}
+                onTrashClick={() => handleDelete(service.id)}
+              />
+            </CardWrapper>
+          ))}
+        </ServiceWrapper>
+      </PageContent>
+
+    </Container>
+  );
+};
 
 export default withLayout(MyServices);

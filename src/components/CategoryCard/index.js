@@ -3,7 +3,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Typography from '../Typography';
 import {
-  Card, Square,
+  Card,
+  Square,
 } from './style';
 
 const styles = StyleSheet.create({
@@ -25,17 +26,13 @@ const styles = StyleSheet.create({
   },
 });
 
-function CategoryCard({ title, color }) {
-  return (
-
-    <Card style={styles.shadow}>
-      <Square color={color} />
-      <Typography variant="text" numberOfLines={1}>
-        { title }
-      </Typography>
-    </Card>
-
-  );
-}
+const CategoryCard = ({ title, color, ...props }) => (
+  <Card style={styles.shadow} {...props}>
+    <Square color={color} />
+    <Typography variant="text" numberOfLines={1}>
+      {title}
+    </Typography>
+  </Card>
+);
 
 export default CategoryCard;

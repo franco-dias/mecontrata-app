@@ -20,14 +20,19 @@ function MyServices({ navigation }) {
 
   useEffect(() => {
     async function fetchData() {
-      const returnPayload = await api.get('/ad/search', {
-        params: {
-          s: value,
-          page: 1,
-          perPage: 5,
-        },
-      });
-      setServices(returnPayload.data);
+      try {
+        const { data } = await api.get('/ad/search/list', {
+          params: {
+            s: value,
+            page: 1,
+            perPage: 200,
+          },
+        });
+        console.log(data);
+        setServices(data);
+      } catch (e) {
+        console.log(e);
+      }
     }
 
     fetchData();
@@ -41,69 +46,26 @@ function MyServices({ navigation }) {
         </Typography>
       </TitleWrapper>
       <InputWrapper>
-
         <Input
           iconName="search"
+          placeholder="Pesquisar..."
           value={value}
-          onBlur={setValue}
+          onChangeText={setValue}
         />
-
       </InputWrapper>
 
       <ScrollCard>
-        <CardWrapper>
-          <ServiceCard
-            color="#ff0000"
-            photoURL="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-9/42672653_1827036637393127_4729297221017665536_o.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=9eu6zmQXPg0AX-CYBUs&_nc_ht=scontent.fudi1-1.fna&oh=3eb1cb8950eb55e3bc5c20bf834b6cdb&oe=5F6625D3"
-            name="João Vitor Pereira"
-            occupation="Jogador"
-          />
-        </CardWrapper>
-
-        <CardWrapper>
-          <ServiceCard
-            color="#ff0000"
-            photoURL="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-9/42672653_1827036637393127_4729297221017665536_o.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=9eu6zmQXPg0AX-CYBUs&_nc_ht=scontent.fudi1-1.fna&oh=3eb1cb8950eb55e3bc5c20bf834b6cdb&oe=5F6625D3"
-            name="João Vitor Pereira"
-            occupation="Jogador"
-          />
-        </CardWrapper>
-
-        <CardWrapper>
-          <ServiceCard
-            color="#ff0000"
-            photoURL="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-9/42672653_1827036637393127_4729297221017665536_o.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=9eu6zmQXPg0AX-CYBUs&_nc_ht=scontent.fudi1-1.fna&oh=3eb1cb8950eb55e3bc5c20bf834b6cdb&oe=5F6625D3"
-            name="João Vitor Pereira"
-            occupation="Jogador"
-          />
-        </CardWrapper>
-
-        <CardWrapper>
-          <ServiceCard
-            color="#ff0000"
-            photoURL="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-9/42672653_1827036637393127_4729297221017665536_o.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=9eu6zmQXPg0AX-CYBUs&_nc_ht=scontent.fudi1-1.fna&oh=3eb1cb8950eb55e3bc5c20bf834b6cdb&oe=5F6625D3"
-            name="João Vitor Pereira"
-            occupation="Jogador"
-          />
-        </CardWrapper>
-
-        <CardWrapper>
-          <ServiceCard
-            color="#ff0000"
-            photoURL="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-9/42672653_1827036637393127_4729297221017665536_o.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=9eu6zmQXPg0AX-CYBUs&_nc_ht=scontent.fudi1-1.fna&oh=3eb1cb8950eb55e3bc5c20bf834b6cdb&oe=5F6625D3"
-            name="João Vitor Pereira"
-            occupation="Jogador"
-          />
-        </CardWrapper>
-
-        <CardWrapper>
-          <ServiceCard
-            color="#ff0000"
-            photoURL="https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-9/42672653_1827036637393127_4729297221017665536_o.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=9eu6zmQXPg0AX-CYBUs&_nc_ht=scontent.fudi1-1.fna&oh=3eb1cb8950eb55e3bc5c20bf834b6cdb&oe=5F6625D3"
-            name="João Vitor Pereira"
-            occupation="Jogador"
-          />
-        </CardWrapper>
+        {services.map((service) => (
+          <CardWrapper key={service.id}>
+            <ServiceCard
+              color={service.category?.color}
+              url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
+              name={service.user?.name}
+              occupation={service.job?.description}
+              onPress={() => navigation.navigate('AdService', { id: service.id })}
+            />
+          </CardWrapper>
+        ))}
       </ScrollCard>
 
     </Container>

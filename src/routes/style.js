@@ -16,11 +16,10 @@ const HeaderRow = styled.View`
   justify-content: space-between;
 `;
 
-const UserImage = styled.View`
+const UserImage = styled.Image`
   width: 48px;
   height: 48px;
   border-radius: 24px;
-  background: #666;
   margin-right: 12px;
 `;
 

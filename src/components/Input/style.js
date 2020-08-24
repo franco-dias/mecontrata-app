@@ -31,8 +31,16 @@ const Icon = styled((props) => <GenericIcon {...props} />)`
   margin-left: 8px;
 `;
 
+const Error = styled.Text`
+  color: #ff0000;
+  font-size: 12px;
+  font-family: InterSemiBold;
+  margin-left: 12px;
+`;
+
 export {
   Container,
   Field,
   Icon,
+  Error,
 };

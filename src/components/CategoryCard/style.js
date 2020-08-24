@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const Card = styled.View`
+const Card = styled.TouchableOpacity`
   width: 100%;
   height: 68px;
-  flex-direction: row; 
+  flex-direction: row;
   align-items:center;
   background-color:#FFF;
   border-radius: 5px;

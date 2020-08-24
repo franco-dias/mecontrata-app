@@ -7,6 +7,7 @@ import withLayout from '../../components/Layout/withLayout';
 import Typography from '../../components/Typography';
 import SpotlightCard from '../../components/SpotlightCard';
 import CategoryCard from '../../components/CategoryCard';
+import capitalizeWords from '../../utils/capitalizeWords';
 
 import {
   ServicesWrapper,
@@ -18,12 +19,16 @@ import {
   ItemCategory,
 } from './style';
 
-function DashboardPage() {
+function DashboardPage({ navigation }) {
   const [categorys, setCategorys] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const returnPayload = await api.get('/category');
-      setCategorys(returnPayload.data);
+      try {
+        const { data } = await api.get('/category');
+        setCategorys(data);
+      } catch (e) {
+        console.log(e);
+      }
     }
 
     fetchData();
@@ -92,9 +97,14 @@ function DashboardPage() {
         <Row />
 
         <ScrollCategory>
-          {categorys.map((cat) => (
-            <ItemCategory>
-              <CategoryCard title={cat.description} color={cat.color} key={cat.id} />
+          {categorys.map((category) => (
+            <ItemCategory key={category.id}>
+              <CategoryCard
+                title={capitalizeWords(category.description)}
+                color={category.color}
+                key={category.id}
+                onPress={() => navigation.navigate('CategoryServices', { id: category.id })}
+              />
             </ItemCategory>
           ))}
         </ScrollCategory>

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-const Card = styled.View`
+const Card = styled.TouchableOpacity`
   width: 100%;
   height: 80px;
-  flex-direction: row; 
+  flex-direction: row;
   align-items:center;
   background-color: #FFF;
   border-radius: 10px;
+  padding-right: 12px;
 `;
 
 const CategoryColor = styled.View`
@@ -18,21 +19,21 @@ const CategoryColor = styled.View`
 `;
 
 const ProfilePhoto = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   margin: 0 16px;
-  border-radius: 20px;
+  border-radius: 30px;
 `;
 
 const TextProfile = styled.Text`
-  font-size: ${({ size }) => (size || 14)};
+  font-size: ${({ size }) => (size || 14)}px;
   font-family: ${({ family }) => (family || 'InterRegular')};
   color: #666;
-`
+`;
 
 export {
-  Card, 
-  CategoryColor, 
+  Card,
+  CategoryColor,
   ProfilePhoto,
-  TextProfile
+  TextProfile,
 };

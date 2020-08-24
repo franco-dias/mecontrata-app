@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useNavigation } from '@react-navigation/native';
+import * as yup from 'yup';
 
 import {
   Container,
@@ -16,6 +17,11 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
 
+const validationSchema = yup.object().shape({
+  email: yup.string().email('Deve ser um e-mail válido').required('Campo obrigatório'),
+  password: yup.string().required('Campo obrigatório').min(8, 'No mínimo 8 caracteres.'),
+});
+
 function SignIn() {
   const navigation = useNavigation();
   const { signIn, authenticated } = useAuth();
@@ -30,13 +36,15 @@ function SignIn() {
         <Logo />
       </LogoWrapper>
       <Formik
-        initialValues={{ email: 'gabrielfdg10@gmail.com', password: 'g12081997' }}
+        initialValues={{}}
+        validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
         {({
           handleChange,
           handleSubmit,
           values,
+          errors,
         }) => (
           <FormWrapper>
             <InputWrapper>
@@ -45,6 +53,7 @@ function SignIn() {
                 placeholder="E-mail"
                 value={values.email}
                 onChangeText={handleChange('email')}
+                error={errors.email}
               />
             </InputWrapper>
             <InputWrapper>
@@ -53,6 +62,7 @@ function SignIn() {
                 placeholder="Senha"
                 value={values.password}
                 onChangeText={handleChange('password')}
+                error={errors.password}
                 secureTextEntry
               />
             </InputWrapper>

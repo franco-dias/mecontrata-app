@@ -21,7 +21,7 @@ const ServiceWrapper = styled.View`
 `;
 
 const InputSelectWrapper = styled.View`
-  margin-top: 0;
+  margin-top: 24px;
 `;
 
 const TextAreaWrapper = styled.View`

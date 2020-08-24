@@ -13,6 +13,7 @@ import {
   OptionsContainer,
   Title,
   Backdrop,
+  Error,
 } from './style';
 
 const Select = ({
@@ -28,7 +29,7 @@ const Select = ({
   const iconColor = useMemo(() => (hasError ? '#FF0B0B' : '#666'), [hasError]);
 
   const showValue = useMemo(
-    () => options.find((option) => option.value === value)?.label,
+    () => options?.find((option) => option.value === value)?.label,
     [options, value],
   );
 
@@ -43,7 +44,7 @@ const Select = ({
         >
           <FieldText>
             {value && showValue}
-            {!value && 'Selecione'}
+            {!value && placeholder}
           </FieldText>
         </Field>
         <Icon
@@ -53,6 +54,7 @@ const Select = ({
           color={iconColor}
         />
       </Container>
+      {hasError && <Error>{error}</Error>}
       <Modal
         animationType="slide"
         hardwareAccelerated
@@ -77,7 +79,7 @@ const Select = ({
                 Limpar seleção
               </OptionText>
             </Option>
-            {options.map((option) => (
+            {options?.map((option) => (
               <Option
                 key={option.value}
                 onPress={() => {
@@ -102,6 +104,7 @@ Select.defaultProps = {
   onChange: () => {},
   error: '',
   placeholder: '',
+  options: [],
 };
 
 Select.propTypes = {
@@ -109,6 +112,10 @@ Select.propTypes = {
   onChange: PropTypes.func,
   error: PropTypes.string,
   placeholder: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  })),
 };
 
 export default Select;

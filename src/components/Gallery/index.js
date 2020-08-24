@@ -11,12 +11,8 @@ import {
 function Gallery({ photos }) {
   return (
     <Container>
-      <Typography variant="subtitle">
-        Galeria
-      </Typography>
-
       <PhotoList horizontal>
-        {photos.map((photo, index) => (
+        {photos?.map((photo, index) => (
           <Photo
             key={index}
             source={{ uri: photo }}
@@ -27,10 +23,14 @@ function Gallery({ photos }) {
   );
 }
 
+Gallery.defaultProps = {
+  photos: [],
+};
+
 Gallery.propTypes = {
   photos: PropTypes.arrayOf(
     PropTypes.string,
-  ).isRequired,
+  ),
 };
 
 export default Gallery;
