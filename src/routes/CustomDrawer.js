@@ -23,7 +23,7 @@ const CustomDrawer = ({ navigation }) => {
         <UserInfo>
           <UserImage
             source={{
-              uri: `http://10.0.2.2:3333/${userData?.avatar.url}`,
+              uri: `http://10.0.2.2:3333/${userData?.avatar?.url}`,
             }}
           />
           <View>
@@ -39,17 +39,15 @@ const CustomDrawer = ({ navigation }) => {
       <MenuContainer>
         <View>
           <MenuItem onPress={() => navigation.navigate('Dashboard')}>
-            <Typography variant="subtitle">
-              Início
-            </Typography>
+            <Typography variant="subtitle">Início</Typography>
           </MenuItem>
           {authenticated && (
             <>
               <MenuItem onPress={() => navigation.navigate('MyServices')}>
-                <Typography variant="subtitle"> Meus serviços </Typography>
+                <Typography variant="subtitle">Meus serviços</Typography>
               </MenuItem>
               <MenuItem onPress={() => navigation.navigate('NewAnnouncement')}>
-                <Typography variant="subtitle"> Oferecer um serviço </Typography>
+                <Typography variant="subtitle">Oferecer um serviço</Typography>
               </MenuItem>
             </>
           )}
@@ -57,10 +55,10 @@ const CustomDrawer = ({ navigation }) => {
             !authenticated && (
               <>
                 <MenuItem onPress={() => navigation.navigate('SignIn')}>
-                  <Typography variant="subtitle"> Realizar Login </Typography>
+                  <Typography variant="subtitle">Realizar Login</Typography>
                 </MenuItem>
                 <MenuItem onPress={() => navigation.navigate('SignUp')}>
-                  <Typography variant="subtitle"> Criar uma conta </Typography>
+                  <Typography variant="subtitle">Criar uma conta</Typography>
                 </MenuItem>
               </>
             )

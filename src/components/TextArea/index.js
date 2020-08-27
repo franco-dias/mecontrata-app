@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
-  InputText,
+  TextInput,
 } from './style';
 
-function TextArea({ placeHolder, onChangeText }) {
+function TextArea({ placeHolder, onChangeText, ...props }) {
   return (
-
-    <InputText
+    <TextInput
       multiline
       style={{
         textAlignVertical: 'top',
@@ -15,9 +14,9 @@ function TextArea({ placeHolder, onChangeText }) {
       onChangeText={onChangeText}
       placeholder={placeHolder}
       placeholderTextColor="#333951"
+      {...props}
     />
-
   );
 }
 
-export default TextArea;
+export default memo(TextArea);

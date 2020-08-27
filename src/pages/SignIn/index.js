@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import { useNavigation } from '@react-navigation/native';
 import * as yup from 'yup';
@@ -24,7 +24,7 @@ const validationSchema = yup.object().shape({
 
 function SignIn() {
   const navigation = useNavigation();
-  const { signIn, authenticated } = useAuth();
+  const { signIn } = useAuth();
 
   const onSubmit = ({ email, password }) => {
     signIn({ email, password });
@@ -33,7 +33,7 @@ function SignIn() {
   return (
     <Container>
       <LogoWrapper>
-        <Logo />
+        <Logo width="320" />
       </LogoWrapper>
       <Formik
         initialValues={{}}
@@ -43,6 +43,8 @@ function SignIn() {
         {({
           handleChange,
           handleSubmit,
+          setFieldTouched,
+          touched,
           values,
           errors,
         }) => (
@@ -54,6 +56,8 @@ function SignIn() {
                 value={values.email}
                 onChangeText={handleChange('email')}
                 error={errors.email}
+                onBlur={() => setFieldTouched('email')}
+                touched={touched.email}
               />
             </InputWrapper>
             <InputWrapper>
@@ -62,7 +66,9 @@ function SignIn() {
                 placeholder="Senha"
                 value={values.password}
                 onChangeText={handleChange('password')}
+                onBlur={() => setFieldTouched('password')}
                 error={errors.password}
+                touched={touched.password}
                 secureTextEntry
               />
             </InputWrapper>

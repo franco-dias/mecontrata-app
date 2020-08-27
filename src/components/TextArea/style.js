@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
-const InputText = styled.TextInput`
+const TextInput = styled.TextInput`
   width: 100%;
   height: 144px;
   background-color: rgba(0,0,0,0.10) ;
@@ -17,5 +17,5 @@ const InputText = styled.TextInput`
 `;
 
 export {
-  InputText,
+  TextInput,
 };

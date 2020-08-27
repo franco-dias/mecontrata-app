@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import withLayout from '../../components/Layout/withLayout';
+import Toast from 'react-native-simple-toast';
 
+import withLayout from '../../components/Layout/withLayout';
 import api from '../../resources/api';
 import ServiceCard from '../../components/ServiceCard';
 import Typography from '../../components/Typography';
@@ -29,7 +30,7 @@ const CategoryServices = ({ route, navigation }) => {
         const { list } = data;
         setServices(list);
       } catch (e) {
-        console.log(e);
+        Toast.show('Não foi possível buscar os anúncios.');
       }
     };
 
@@ -38,7 +39,7 @@ const CategoryServices = ({ route, navigation }) => {
         const { data } = await api.get(`/category/${id}`);
         setCategory(data);
       } catch (e) {
-        console.log(e);
+        Toast.show('Não foi possível buscar os dados da categoria.');
       }
     };
 
@@ -46,14 +47,10 @@ const CategoryServices = ({ route, navigation }) => {
     getCategory();
   }, [id]);
 
-  useEffect(() => {
-    console.log(services);
-  }, [services]);
-
   return (
     <View>
       <Typography variant="title">
-        {capitalizeWords(category?.description)}
+        {`Categoria - ${capitalizeWords(category?.description)}`}
       </Typography>
       <ServicesWrapper>
         {services.map((service) => (

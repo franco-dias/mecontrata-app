@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
+import Toast from 'react-native-simple-toast';
+
 import api from '../../resources/api';
 import Typography from '../../components/Typography';
 import withLayout from '../../components/Layout/withLayout';
 import ServiceCard from '../../components/ServiceCard';
-
 import Input from '../../components/Input';
-
 import {
   Container,
   TitleWrapper,
@@ -18,25 +18,20 @@ function MyServices({ navigation }) {
   const [value, setValue] = useState('');
   const [services, setServices] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data } = await api.get('/ad/search/list', {
-          params: {
-            s: value,
-            page: 1,
-            perPage: 200,
-          },
-        });
-        console.log(data);
-        setServices(data);
-      } catch (e) {
-        console.log(e);
-      }
+  const fetchData = useCallback(async () => {
+    try {
+      const { data } = await api.get('/ad/search/list', {
+        params: {
+          s: value,
+          page: 1,
+          perPage: 200,
+        },
+      });
+      setServices(data);
+    } catch (e) {
+      Toast.show('Ocorreu um erro ao buscar a listagem de anúncios.');
     }
-
-    fetchData();
-  }, [value]);
+  }, [api, value, setServices]);
 
   return (
     <Container>
@@ -51,6 +46,8 @@ function MyServices({ navigation }) {
           placeholder="Pesquisar..."
           value={value}
           onChangeText={setValue}
+          onIconPress={fetchData}
+          onSubmitEditing={fetchData}
         />
       </InputWrapper>
 

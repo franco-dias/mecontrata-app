@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import Toast from 'react-native-simple-toast';
 
 import * as yup from 'yup';
 import PhotoUpload from '../../components/PhotoUpload';
@@ -34,17 +35,12 @@ const SignUp = ({ navigation }) => {
   const [photo, setPhoto] = useState({});
   const [locations, setLocations] = useState([]);
 
-  const getLocations = async () => {
-    try {
-      const { data } = await api.get('/states/list');
-      setLocations(data);
-    } catch (e) {
-      console.log(e);
-    }
+  const getLocations = () => {
+    api.get('/states/list')
+      .then(({ data }) => setLocations(data));
   };
 
   useEffect(() => {
-    navigation.closeDrawer();
     getLocations();
   }, []);
 
@@ -60,8 +56,10 @@ const SignUp = ({ navigation }) => {
     data.append('data', JSON.stringify(values));
 
     formDataApi.post('/user', data)
-      .then(() => navigation.navigate('SignIn'))
-      .catch((error) => console.log(JSON.stringify(error, null, 1)));
+      .then(() => {
+        Toast.show('Cadastro realizado com sucesso!');
+        navigation.navigate('SignIn');
+      });
   };
 
   return (
@@ -79,94 +77,91 @@ const SignUp = ({ navigation }) => {
           setFieldValue,
           values,
           errors,
-        }) => {
-          console.log(errors);
-          return (
-            <PageContent>
-              <UploadWrapper>
-                <PhotoUpload
-                  size={192}
-                  photo={photo}
-                  setPhoto={setPhoto}
-                />
-              </UploadWrapper>
-              <InputWrapper>
-                <Input
-                  iconName="person"
-                  placeholder="Nome completo"
-                  onChangeText={handleChange('name')}
-                  value={values.name}
-                  error={errors.name}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Input
-                  iconName="mail-outline"
-                  placeholder="E-mail"
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  error={errors.email}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Input
-                  iconName="vpn-key"
-                  placeholder="Senha"
-                  onChangeText={handleChange('password')}
-                  secureTextEntry
-                  value={values.password}
-                  error={errors.password}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Input
-                  iconName="vpn-key"
-                  placeholder="Senha"
-                  onChangeText={handleChange('confirmPassword')}
-                  secureTextEntry
-                  value={values.confirmPassword}
-                  error={errors.confirmPassword}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Input
-                  iconName="phone"
-                  placeholder="Telefone"
-                  onChangeText={handleChange('phoneNumber')}
-                  value={values.phoneNumber}
-                  error={errors.phoneNumber}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Select
-                  options={locations}
-                  placeholder="Selecione um estado"
-                  value={values.state}
-                  error={errors.state}
-                  onChange={(value) => {
-                    setFieldValue('state', value);
-                    setFieldValue('city', null);
-                  }}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Select
-                  options={locations.find((item) => item.value === values.state)?.cities}
-                  placeholder="Selecione uma cidade"
-                  value={values.city}
-                  error={errors.city}
-                  onChange={(value) => setFieldValue('city', value)}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <Button onPress={handleSubmit} label="Cadastrar" />
-              </InputWrapper>
-              <LinkContainer>
-                <LinkText onPress={() => navigation.navigate('SignIn')}> Já tenho cadastro </LinkText>
-              </LinkContainer>
-            </PageContent>
-          );
-        }}
+        }) => (
+          <PageContent>
+            <UploadWrapper>
+              <PhotoUpload
+                size={192}
+                photo={photo}
+                setPhoto={setPhoto}
+              />
+            </UploadWrapper>
+            <InputWrapper>
+              <Input
+                iconName="person"
+                placeholder="Nome completo"
+                onChangeText={handleChange('name')}
+                value={values.name}
+                error={errors.name}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                iconName="mail-outline"
+                placeholder="E-mail"
+                onChangeText={handleChange('email')}
+                value={values.email}
+                error={errors.email}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                iconName="vpn-key"
+                placeholder="Senha"
+                onChangeText={handleChange('password')}
+                secureTextEntry
+                value={values.password}
+                error={errors.password}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                iconName="vpn-key"
+                placeholder="Senha"
+                onChangeText={handleChange('confirmPassword')}
+                secureTextEntry
+                value={values.confirmPassword}
+                error={errors.confirmPassword}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                iconName="phone"
+                placeholder="Telefone"
+                onChangeText={handleChange('phoneNumber')}
+                value={values.phoneNumber}
+                error={errors.phoneNumber}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Select
+                options={locations}
+                placeholder="Selecione um estado"
+                value={values.state}
+                error={errors.state}
+                onChange={(value) => {
+                  setFieldValue('state', value);
+                  setFieldValue('city', null);
+                }}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Select
+                options={locations.find((item) => item.value === values.state)?.cities}
+                placeholder="Selecione uma cidade"
+                value={values.city}
+                error={errors.city}
+                onChange={(value) => setFieldValue('city', value)}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Button onPress={handleSubmit} label="Cadastrar" />
+            </InputWrapper>
+            <LinkContainer>
+              <LinkText onPress={() => navigation.navigate('SignIn')}> Já tenho cadastro </LinkText>
+            </LinkContainer>
+          </PageContent>
+        )}
       </Formik>
     </Container>
   );

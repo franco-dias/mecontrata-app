@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, memo } from 'react';
 import { Modal } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -21,11 +21,13 @@ const Select = ({
   options,
   value,
   onChange,
+  onBlur,
   placeholder,
+  touched,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const hasError = useMemo(() => Boolean(error), [error]);
+  const hasError = useMemo(() => Boolean(error) && touched, [error, touched]);
   const iconColor = useMemo(() => (hasError ? '#FF0B0B' : '#666'), [hasError]);
 
   const showValue = useMemo(
@@ -33,14 +35,30 @@ const Select = ({
     [options, value],
   );
 
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    if (onBlur) {
+      onBlur();
+    }
+  };
+
+  const handleChange = (option) => () => {
+    onChange(option);
+    closeModal();
+  };
+
   return (
     <>
       <Container
         hasError={hasError}
-        onPress={() => setModalVisible(true)}
+        onPress={openModal}
       >
         <Field
-          onPress={() => setModalVisible(true)}
+          onPress={openModal}
         >
           <FieldText>
             {value && showValue}
@@ -58,22 +76,19 @@ const Select = ({
       <Modal
         animationType="slide"
         hardwareAccelerated
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={closeModal}
         presentationStyle="overFullScreen"
         transparent
         visible={modalVisible}
       >
-        <Backdrop onPress={() => setModalVisible(false)} />
+        <Backdrop onPress={closeModal} />
         <OptionsContainer>
           <Title variant="subtitle">
             {placeholder}
           </Title>
           <OptionsView>
             <Option
-              onPress={() => {
-                onChange('');
-                setModalVisible(false);
-              }}
+              onPress={handleChange('')}
             >
               <OptionText small>
                 Limpar seleção
@@ -82,10 +97,7 @@ const Select = ({
             {options?.map((option) => (
               <Option
                 key={option.value}
-                onPress={() => {
-                  onChange(option.value);
-                  setModalVisible(false);
-                }}
+                onPress={handleChange(option.value)}
               >
                 <OptionText>
                   {option.label}
@@ -118,4 +130,4 @@ Select.propTypes = {
   })),
 };
 
-export default Select;
+export default memo(Select);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Text } from './style';
 
 function Typography({ variant, children, color }) {
@@ -9,4 +9,4 @@ function Typography({ variant, children, color }) {
   );
 }
 
-export default Typography;
+export default memo(Typography);

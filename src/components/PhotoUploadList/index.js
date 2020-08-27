@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 
 import PhotoUpload from '../PhotoUpload';
 
@@ -45,4 +45,4 @@ const PhotoUploadList = ({
   );
 };
 
-export default PhotoUploadList;
+export default memo(PhotoUploadList);

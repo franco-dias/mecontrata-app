@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { ButtonContainer, ButtonText } from './style';
 
-function Button({ label, ...props }) {
+function Button({ label, link, ...props }) {
   return (
-    <ButtonContainer {...props}>
-      <ButtonText>
+    <ButtonContainer {...props} link={link}>
+      <ButtonText link={link}>
         {label}
       </ButtonText>
     </ButtonContainer>
   );
 }
 
-export default Button;
+export default memo(Button);

@@ -1,22 +1,20 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Dashboard from '../pages/Dashboard';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
-import CustomDrawer from './CustomDrawer';
 import CategoryServices from '../pages/CategoryServices';
 import AdService from '../pages/AdService';
 import SearchServices from '../pages/SearchServices';
 
-const AppStack = createDrawerNavigator();
+const AppStack = createStackNavigator();
 
 const AppRoutes = () => (
   <AppStack.Navigator
-    drawerType="slide"
-    drawerContent={(props) => <CustomDrawer {...props} />}
-    navigationOptions={{
-      unmountInactiveRoutes: true,
+    mode="modal"
+    screenOptions={{
+      headerShown: false,
     }}
   >
     <AppStack.Screen name="Dashboard" component={Dashboard} />

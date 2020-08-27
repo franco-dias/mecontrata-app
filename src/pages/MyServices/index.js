@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
+import Toast from 'react-native-simple-toast';
 import Typography from '../../components/Typography';
 import Icon from '../../components/Icon';
 import ServiceCard from '../../components/ServiceCard';
@@ -31,7 +32,7 @@ const MyServices = ({ navigation }) => {
       });
       setServices(response.data.list);
     } catch (e) {
-      console.log(e);
+      Toast.show('Ocorreu um erro ao buscar a listagem de anúncios.');
     }
 
     return () => {};

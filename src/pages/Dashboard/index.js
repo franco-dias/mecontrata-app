@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
 } from 'react-native';
+import Toast from 'react-native-simple-toast';
+
 import api from '../../resources/api';
 import withLayout from '../../components/Layout/withLayout';
 import Typography from '../../components/Typography';
@@ -27,7 +29,7 @@ function DashboardPage({ navigation }) {
         const { data } = await api.get('/category');
         setCategorys(data);
       } catch (e) {
-        console.log(e);
+        Toast.show('Ocorreu um erro ao buscar as categorias.');
       }
     }
 
@@ -40,7 +42,7 @@ function DashboardPage({ navigation }) {
         Encontre serviços
       </Typography>
 
-      <ServicesWrapper>
+      {/* <ServicesWrapper>
         <Typography variant="subtitle">
           Últimos
         </Typography>
@@ -87,7 +89,7 @@ function DashboardPage({ navigation }) {
             />
           </ItemService>
         </ScrollCard>
-      </ServicesWrapper>
+      </ServicesWrapper> */}
 
       <CategoryWrapper>
         <Typography variant="subtitle">

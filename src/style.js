@@ -11,4 +11,12 @@ const AppView = styled.View`
   width: 100%;
 `;
 
-export { SafeArea, AppView };
+const LoadingView = styled.View`
+  min-width: 100%;
+  min-height: 100%;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+`;
+
+export { SafeArea, AppView, LoadingView };

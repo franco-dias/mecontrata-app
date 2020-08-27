@@ -4,46 +4,57 @@ import React, {
   createContext,
   useContext,
 } from 'react';
-
-import { View, ActivityIndicator } from 'react-native';
-
+import { ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import api, { formDataApi } from '../resources/api';
+import SplashScreen from '../components/SplashScreen';
+import api from '../resources/api';
+import { LoadingView } from '../style';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [loader, setLoader] = useState(false);
 
-  const setAuthData = (user, token) => {
-    const interceptorRequest = (config) => {
-      config.headers.authorization = token;
-      return config;
-    };
-
-    api.interceptors.request.use(interceptorRequest);
-    formDataApi.interceptors.request.use(interceptorRequest);
-    // api.interceptors.response.use(interceptorResponse);
-    // formDataApi.interceptors.response.use(interceptorResponse);
+  const setAuthData = (user) => {
     setUserData(user);
   };
 
   useEffect(() => {
     const onProviderStart = async () => {
-      const [token, user] = await AsyncStorage.multiGet([
-        '@MeContrata/Token',
-        '@MeContrata/User',
-      ]);
-      if (token[1] && user[1]) {
-        setAuthData(JSON.parse(user[1]), token[1]);
+      const user = await AsyncStorage.getItem('@MeContrata/User');
+      if (user) {
+        setAuthData(JSON.parse(user));
       }
-      // setLoading(false);
+      setLoading(false);
     };
 
     onProviderStart();
   }, []);
+
+  useEffect(() => {
+    const requestId = api.interceptors.request.use((config) => {
+      setLoader(true);
+      return config;
+    });
+    const responseId = api.interceptors.response.use(
+      (response) => {
+        setLoader(false);
+        return response;
+      },
+      (error) => {
+        setLoader(false);
+        return Promise.reject(error);
+      },
+    );
+
+    return () => {
+      api.interceptors.request.eject(requestId);
+      api.interceptors.response.eject(responseId);
+    };
+  });
 
   const signIn = async ({ email, password }) => {
     try {
@@ -54,33 +65,30 @@ const AuthProvider = ({ children }) => {
         ['@MeContrata/User', JSON.stringify(user)],
       ]);
       setAuthData(user, `Bearer ${token}`);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const signOut = async () => {
+    setUserData(null);
     await AsyncStorage.multiRemove([
       '@MeContrata/Token',
       '@MeContrata/User',
     ]);
-    setUserData(null);
   };
+
+  if (loading) {
+    return <SplashScreen />;
+  }
 
   return (
     <>
-      {/* <View
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          flex: 1,
-          zIndex: 99999,
-          backgroundColor: '#ffffff',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <ActivityIndicator size="large" />
-      </View> */}
+      {loader && (
+        <LoadingView>
+          <ActivityIndicator size="large" color="#6C6CE5" />
+        </LoadingView>
+      )}
       <AuthContext.Provider
         value={{
           userData,

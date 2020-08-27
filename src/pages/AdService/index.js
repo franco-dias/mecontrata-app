@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Linking } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 import {
   Container,
@@ -32,7 +33,8 @@ function AdService({
         const { data } = await api.get(`/ad/${id}`);
         setAdData(data);
       } catch (e) {
-        console.log(e);
+        Toast.show('Ocorreu um erro ao buscar o anúncio.');
+        navigation.navigate('Dashboard');
       }
     };
     getAdData();
