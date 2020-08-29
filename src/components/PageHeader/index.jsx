@@ -7,11 +7,21 @@ import {
   MenuButton,
   SearchButton,
   StyledLogo,
+  GoBackButton,
+  GoBackButtonText,
 } from './style';
 import { useAuth } from '../../contexts/AuthContext';
 
-const PageHeader = ({ navigation }) => {
+const PageHeader = ({ navigation, route }) => {
   const { authenticated } = useAuth();
+
+  const handleRightIconClick = () => {
+    if (route.name === 'Dashboard') {
+      return navigation.navigate('SearchServices');
+    }
+    return navigation.goBack();
+  };
+
   return (
     <Container>
       <MenuButton>
@@ -27,8 +37,14 @@ const PageHeader = ({ navigation }) => {
       </MenuButton>
       <StyledLogo width={120} height={40} />
       <SearchButton>
-        <IconButton onPress={() => navigation.navigate('SearchServices')}>
-          <Icon lib="MaterialDesign" iconName="search" size={24} color="#666" />
+        <IconButton onPress={handleRightIconClick}>
+          {route.name === 'Dashboard' ? (
+            <Icon lib="MaterialDesign" iconName="search" size={24} color="#666" />
+          ) : (
+            <GoBackButton onPress={handleRightIconClick}>
+              <GoBackButtonText>Voltar</GoBackButtonText>
+            </GoBackButton>
+          )}
         </IconButton>
       </SearchButton>
     </Container>

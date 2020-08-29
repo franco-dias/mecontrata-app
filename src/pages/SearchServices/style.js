@@ -6,6 +6,7 @@ const Container = styled.SafeAreaView`
 
 const TitleWrapper = styled.View`
   flex: 1;
+  margin-top: 24px;
 `;
 
 const InputWrapper = styled.View`

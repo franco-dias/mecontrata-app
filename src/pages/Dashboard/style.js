@@ -36,6 +36,10 @@ const ItemCategory = styled.View`
   margin-bottom: 11px;
 `;
 
+const TitleWrapper = styled.View`
+  margin-top: 24px;
+`;
+
 export {
   ServicesWrapper,
   ScrollCard,
@@ -44,4 +48,5 @@ export {
   Row,
   ScrollCategory,
   ItemCategory,
+  TitleWrapper,
 };

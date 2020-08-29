@@ -4,18 +4,22 @@ import Toast from 'react-native-simple-toast';
 
 import withLayout from '../../components/Layout/withLayout';
 import api from '../../resources/api';
+import EmptyState from '../../components/EmptyState';
 import ServiceCard from '../../components/ServiceCard';
 import Typography from '../../components/Typography';
 import capitalizeWords from '../../utils/capitalizeWords';
 import {
   ServicesWrapper,
   CardWrapper,
+  TitleWrapper,
 } from './style';
 
 const CategoryServices = ({ route, navigation }) => {
   const [category, setCategory] = useState({});
   const [services, setServices] = useState([]);
+  const [emptyState, setEmptyState] = useState(false);
   const { id } = route.params;
+
   useEffect(() => {
     const getServices = async () => {
       try {
@@ -28,6 +32,9 @@ const CategoryServices = ({ route, navigation }) => {
           },
         });
         const { list } = data;
+        if (!list.length) {
+          setEmptyState(true);
+        }
         setServices(list);
       } catch (e) {
         Toast.show('Não foi possível buscar os anúncios.');
@@ -49,22 +56,31 @@ const CategoryServices = ({ route, navigation }) => {
 
   return (
     <View>
-      <Typography variant="title">
-        {`Categoria - ${capitalizeWords(category?.description)}`}
-      </Typography>
-      <ServicesWrapper>
-        {services.map((service) => (
-          <CardWrapper key={service.id}>
-            <ServiceCard
-              color={service.category?.color}
-              url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
-              name={service.user.name}
-              occupation={service.job?.description}
-              onPress={() => navigation.navigate('AdService', { id: service.id })}
-            />
-          </CardWrapper>
-        ))}
-      </ServicesWrapper>
+      <TitleWrapper>
+        <Typography variant="title">
+          {capitalizeWords(category?.description)}
+        </Typography>
+      </TitleWrapper>
+      {services.length ? (
+        <ServicesWrapper>
+          {services.map((service) => (
+            <CardWrapper key={service.id}>
+              <ServiceCard
+                color={service.category?.color}
+                url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
+                name={service.user.name}
+                occupation={service.job?.description}
+                onPress={() => navigation.navigate('AdService', { id: service.id })}
+              />
+            </CardWrapper>
+          ))}
+        </ServicesWrapper>
+      ) : emptyState && (
+        <EmptyState
+          imageName="EmptyInbox"
+          message="Ainda não há anúncios nessa categoria."
+        />
+      )}
     </View>
   );
 };

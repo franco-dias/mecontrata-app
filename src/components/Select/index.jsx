@@ -26,6 +26,7 @@ const Select = ({
   onBlur,
   placeholder,
   touched,
+  disabled,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -38,13 +39,16 @@ const Select = ({
   );
 
   const openModal = () => {
+    if (disabled) return;
     setModalVisible(true);
   };
 
   const closeModal = () => {
     setModalVisible(false);
     if (onBlur) {
-      onBlur();
+      setTimeout(() => {
+        onBlur();
+      }, 200);
     }
   };
 
@@ -67,6 +71,7 @@ const Select = ({
       <Container
         hasError={hasError}
         onPress={openModal}
+        disabled={disabled}
       >
         <Field
           onPress={openModal}
@@ -110,7 +115,7 @@ const Select = ({
             style={{ flex: 1 }}
             data={filteredOptions}
             initialNumToRender={20}
-            keyExtractor={(option) => option.value}
+            keyExtractor={(option) => String(option.value)}
             getItem={(data, index) => data[index]}
             getItemCount={() => filteredOptions.length}
             renderItem={({ item }) => (
@@ -136,6 +141,7 @@ Select.defaultProps = {
   error: '',
   placeholder: '',
   options: [],
+  disabled: false,
 };
 
 Select.propTypes = {
@@ -147,6 +153,7 @@ Select.propTypes = {
     label: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   })),
+  disabled: PropTypes.bool,
 };
 
 export default memo(Select);

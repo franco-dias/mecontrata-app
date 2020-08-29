@@ -19,6 +19,7 @@ import {
   Row,
   ScrollCategory,
   ItemCategory,
+  TitleWrapper,
 } from './style';
 
 function DashboardPage({ navigation }) {
@@ -38,9 +39,11 @@ function DashboardPage({ navigation }) {
 
   return (
     <View>
-      <Typography variant="title">
-        Encontre serviços
-      </Typography>
+      <TitleWrapper>
+        <Typography variant="title">
+          Encontre serviços
+        </Typography>
+      </TitleWrapper>
 
       {/* <ServicesWrapper>
         <Typography variant="subtitle">

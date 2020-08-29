@@ -10,6 +10,8 @@ import {
   InputWrapper,
   Link as LinkContainer,
   LinkText,
+  Text,
+  Row,
 } from './style';
 
 import { useAuth } from '../../contexts/AuthContext';
@@ -76,7 +78,12 @@ function SignIn() {
               <Button onPress={handleSubmit} label="Entrar" />
             </InputWrapper>
             <LinkContainer>
-              <LinkText onPress={() => navigation.navigate('SignUp')}> Criar uma conta </LinkText>
+              <Text marginRight> Ainda não tem uma conta? </Text>
+              <Row>
+                <LinkText onPress={() => navigation.navigate('SignUp')}> crie uma aqui </LinkText>
+                <Text marginHorizontal> ou </Text>
+                <LinkText onPress={() => navigation.navigate('Dashboard')}> entre como convidado </LinkText>
+              </Row>
             </LinkContainer>
           </FormWrapper>
         )}

@@ -4,12 +4,10 @@ import React, {
   createContext,
   useContext,
 } from 'react';
-import { ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import SplashScreen from '../components/SplashScreen';
 import api from '../resources/api';
-import { LoadingView } from '../style';
 
 const AuthContext = createContext();
 
@@ -83,23 +81,17 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <>
-      {loader && (
-        <LoadingView>
-          <ActivityIndicator size="large" color="#6C6CE5" />
-        </LoadingView>
-      )}
-      <AuthContext.Provider
-        value={{
-          userData,
-          signIn,
-          signOut,
-          authenticated: Boolean(userData),
-        }}
-      >
-        {children}
-      </AuthContext.Provider>
-    </>
+    <AuthContext.Provider
+      value={{
+        userData,
+        signIn,
+        signOut,
+        authenticated: Boolean(userData),
+        loader,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 

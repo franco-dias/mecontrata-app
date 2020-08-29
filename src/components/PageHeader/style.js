@@ -25,9 +25,26 @@ const SearchButton = styled.View`
   top: 16px;
 `;
 
+const GoBackButton = styled.TouchableOpacity`
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  height: 24px;
+  width: 50px;
+  align-items: flex-end;
+`;
+
+const GoBackButtonText = styled.Text`
+  font-size: 14px;
+  color: #666;
+  font-family: InterRegular;
+`;
+
 export {
   Container,
   MenuButton,
   SearchButton,
   StyledLogo,
+  GoBackButton,
+  GoBackButtonText,
 };

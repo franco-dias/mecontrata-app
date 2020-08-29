@@ -10,7 +10,7 @@ const PageContent = styled.ScrollView`
 `;
 
 const TitleWrapper = styled.View`
-  padding-top: 25px;
+  padding-top: 24px;
 `;
 
 const CategoryWrapper = styled.View`

@@ -39,7 +39,6 @@ const Form = ({
 
   useImperativeHandle(ref, () => ({
     resetForm,
-    setFieldValue,
   }));
 
   useEffect(() => {
@@ -92,6 +91,7 @@ const Form = ({
           value={values.jobId}
           error={errors.jobId}
           touched={touched.jobId}
+          disabled={!values.categoryId}
           onChange={(value) => setFieldValue('jobId', value)}
           placeholder="Selecione uma profissão"
           onBlur={() => setFieldTouched('jobId')}

@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import Toast from 'react-native-simple-toast';
 import Typography from '../../components/Typography';
 import Icon from '../../components/Icon';
 import ServiceCard from '../../components/ServiceCard';
 import withLayout from '../../components/Layout/withLayout';
+import EmptyState from '../../components/EmptyState';
 import { useAuth } from '../../contexts/AuthContext';
 import capitalizeWords from '../../utils/capitalizeWords';
 import {
@@ -14,11 +15,15 @@ import {
   TitleWrapper,
   ServiceWrapper,
   CardWrapper,
+  CreateAdText,
+  CreateAdLinkText,
 } from './style';
+
 import api from '../../resources/api';
 
 const MyServices = ({ navigation }) => {
   const [services, setServices] = useState([]);
+  const [emptyState, setEmptyState] = useState(false);
   const { userData } = useAuth();
   const getServices = useCallback(async () => {
     try {
@@ -30,6 +35,9 @@ const MyServices = ({ navigation }) => {
           order: 'DESC',
         },
       });
+      if (!response.data.list.length) {
+        setEmptyState(true);
+      }
       setServices(response.data.list);
     } catch (e) {
       Toast.show('Ocorreu um erro ao buscar a listagem de anúncios.');
@@ -68,21 +76,35 @@ const MyServices = ({ navigation }) => {
       </TitleWrapper>
 
       <PageContent>
-        <ServiceWrapper>
-          {services.map((service) => (
-            <CardWrapper key={service.id}>
-              <ServiceCard
-                color={service.category?.color}
-                url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
-                name={service.job?.description}
-                occupation={capitalizeWords(service.category?.description)}
-                trash
-                onPress={() => navigation.navigate('AdService', { id: service.id })}
-                onTrashClick={() => handleDelete(service.id)}
-              />
-            </CardWrapper>
-          ))}
-        </ServiceWrapper>
+        {services.length ? (
+          <ServiceWrapper>
+            {services.map((service) => (
+              <CardWrapper key={service.id}>
+                <ServiceCard
+                  color={service.category?.color}
+                  url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
+                  name={service.job?.description}
+                  occupation={capitalizeWords(service.category?.description)}
+                  trash
+                  onPress={() => navigation.navigate('AdService', { id: service.id })}
+                  onTrashClick={() => handleDelete(service.id)}
+                />
+              </CardWrapper>
+            ))}
+          </ServiceWrapper>
+        ) : (
+          <EmptyState
+            imageName="EmptyInbox"
+            message={(
+              <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                <CreateAdText>Você ainda não tem serviços.</CreateAdText>
+                <TouchableOpacity onPress={() => navigation.navigate('NewAnnouncement')}>
+                  <CreateAdLinkText marginLeft>Que tal oferecer o primeiro?</CreateAdLinkText>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        )}
       </PageContent>
 
     </Container>
