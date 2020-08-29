@@ -8,7 +8,12 @@ const CardWrapper = styled.View`
   margin-top: 16px;
 `;
 
+const TitleWrapper = styled.View`
+  margin-top: 24px;
+`;
+
 export {
   ServicesWrapper,
   CardWrapper,
+  TitleWrapper,
 };

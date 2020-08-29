@@ -7,6 +7,10 @@ const Row = styled.View`
   padding-bottom: 24px;
 `;
 
+const TitleWrapper = styled.View`
+  padding-top: 24px;
+`;
+
 const Container = styled.KeyboardAvoidingView`
   flex: 1;
   margin-top: 12px;
@@ -42,4 +46,5 @@ export {
   UserPhoto,
   UsernameAndIcon,
   ButtonContainer,
+  TitleWrapper,
 };

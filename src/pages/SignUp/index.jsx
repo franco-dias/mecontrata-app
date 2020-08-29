@@ -154,6 +154,7 @@ const SignUp = ({ navigation }) => {
                 placeholder="Selecione uma cidade"
                 value={values.city}
                 error={errors.city}
+                disabled={!values.state}
                 onChange={(value) => setFieldValue('city', value)}
               />
             </InputWrapper>

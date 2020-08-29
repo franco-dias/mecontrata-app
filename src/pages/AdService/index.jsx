@@ -9,6 +9,7 @@ import {
   UserPhoto,
   UsernameAndIcon,
   ButtonContainer,
+  TitleWrapper,
 } from './style';
 
 import Typography from '../../components/Typography';
@@ -41,26 +42,28 @@ function AdService({
   }, [id]);
 
   const gallery = useMemo(
-    () => adData.photos?.map((photo) => `http://10.0.2.2:3333/${photo.url}`),
+    () => adData.photos?.map((photo) => `http://localhost:3333/${photo.url}`),
     [adData],
   );
 
   return (
     <Container>
-      <Row>
-        <UserPhoto source={{ uri: `http://10.0.2.2:3333/${adData.user?.avatar?.url}` }} />
-        <Col>
-          <UsernameAndIcon>
-            <Typography variant="subtitle" color="#333951">
-              {adData.user?.name}
+      <TitleWrapper>
+        <Row>
+          <UserPhoto source={{ uri: `http://localhost:3333/${adData.user?.avatar?.url}` }} />
+          <Col>
+            <UsernameAndIcon>
+              <Typography variant="subtitle" color="#333951">
+                {adData.user?.name}
+              </Typography>
+              <Icon lib="AntDesign" iconName="like2" color="#000" size={20} />
+            </UsernameAndIcon>
+            <Typography variant="text" color="#333951">
+              {capitalizeWords(adData.job?.description)}
             </Typography>
-            <Icon lib="AntDesign" iconName="like2" color="#000" size={20} />
-          </UsernameAndIcon>
-          <Typography variant="text" color="#333951">
-            {capitalizeWords(adData.job?.description)}
-          </Typography>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </TitleWrapper>
       <Row>
         <Typography variant="text" color="#333951">
           {adData?.description}

@@ -11,12 +11,13 @@ const AppView = styled.View`
   width: 100%;
 `;
 
-const LoadingView = styled.View`
+const LoaderView = styled.View`
   min-width: 100%;
   min-height: 100%;
-  background-color: #ffffff;
+  flex: 1;
+  background-color: #000;
   align-items: center;
   justify-content: center;
 `;
 
-export { SafeArea, AppView, LoadingView };
+export { SafeArea, AppView, LoaderView };

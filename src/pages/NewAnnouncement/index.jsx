@@ -42,7 +42,6 @@ const NewAnnouncement = ({ navigation }) => {
         Toast.show('Anúncio cadastrado com sucesso!');
         if (formRef.current) {
           formRef.current.resetForm();
-          formRef.current.setFieldValue('description', '');
           setPhotos([]);
         }
         navigation.navigate('MyServices');
@@ -60,11 +59,7 @@ const NewAnnouncement = ({ navigation }) => {
         <Formik
           onSubmit={onSubmit}
           validationSchema={validationSchema}
-          initialValues={{
-            categoryId: null,
-            jobId: null,
-            description: '',
-          }}
+          initialValues={{}}
         >
           {(formikProps) => (
             <Form

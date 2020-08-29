@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import Dashboard from '../pages/Dashboard';
 import SignUp from '../pages/SignUp';
@@ -15,7 +15,9 @@ const AppRoutes = () => (
     mode="modal"
     screenOptions={{
       headerShown: false,
+      cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     }}
+    initialRouteName="SignIn"
   >
     <AppStack.Screen name="Dashboard" component={Dashboard} />
     <AppStack.Screen

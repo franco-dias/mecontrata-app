@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -23,13 +23,30 @@ const Link = styled.TouchableOpacity`
   margin-top: 16px;
   width: 100%;
   align-items: center;
-  margin-bottom: 32px;
 `;
 
 const LinkText = styled.Text`
-  color: #666666;
+  color: #6C6CE5;
   font-family: InterSemiBold;
   font-size: 16px;
+`;
+
+const Text = styled.Text`
+  font-size: 16px;
+  color: #666666;
+  ${({ marginRight }) => marginRight && css`
+    margin-right: 4px;
+  `}
+  ${({ marginHorizontal }) => marginHorizontal && css`
+    margin: 0 4px;
+  `}
+`;
+
+const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
 `;
 
 export {
@@ -39,4 +56,6 @@ export {
   InputWrapper,
   Link,
   LinkText,
+  Text,
+  Row,
 };

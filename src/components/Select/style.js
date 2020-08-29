@@ -20,6 +20,9 @@ const Container = styled.TouchableOpacity`
   ${({ isFocused }) => isFocused && css`
     border-color: #6C6CE5;
   `}
+  ${({ disabled }) => disabled && css`
+    opacity: 0.6;
+  `}
 `;
 
 const Field = styled.TouchableOpacity`

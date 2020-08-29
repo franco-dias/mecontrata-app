@@ -4,12 +4,12 @@ import { css } from 'styled-components';
 const textStyles = {
   title: css`
     font-size: 30px;
-    font-family: InterSemiBold;
+    font-family: InterLight;
     color: ${({ color }) => (color || '#333951')} ;
   `,
   subtitle: css`
     font-size: 18px;
-    font-family: InterSemiBold;
+    font-family: InterExtraLight;
     color: ${({ color }) => (color || '#333951')} ;
   `,
   text: css`
