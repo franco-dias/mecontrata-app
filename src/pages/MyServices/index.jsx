@@ -82,7 +82,7 @@ const MyServices = ({ navigation }) => {
               <CardWrapper key={service.id}>
                 <ServiceCard
                   color={service.category?.color}
-                  url={`http://localhost:3333/${service.photos[0]?.url}`}
+                  url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
                   name={service.job?.description}
                   occupation={capitalizeWords(service.category?.description)}
                   trash

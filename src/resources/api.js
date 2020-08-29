@@ -4,7 +4,7 @@ import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: 'http://10.0.2.2:3333',
 });
 
 api.interceptors.request.use(async (config) => {
@@ -22,7 +22,7 @@ api.interceptors.response.use(
 );
 
 const formDataApi = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: 'http://10.0.2.2:3333',
   headers: {
     'Content-Type': 'multipart/form-data',
   },
