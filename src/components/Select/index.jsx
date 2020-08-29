@@ -1,19 +1,21 @@
 import React, { useState, useMemo, memo } from 'react';
-import { Modal } from 'react-native';
+import { Modal, VirtualizedList } from 'react-native';
 import PropTypes from 'prop-types';
+
+import Input from '../Input';
 
 import {
   Container,
   Field,
   FieldText,
   Icon,
-  OptionsView,
   Option,
   OptionText,
   OptionsContainer,
   Title,
   Backdrop,
   Error,
+  SearchContainer,
 } from './style';
 
 const Select = ({
@@ -26,7 +28,7 @@ const Select = ({
   touched,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [searchText, setSearchText] = useState('');
   const hasError = useMemo(() => Boolean(error) && touched, [error, touched]);
   const iconColor = useMemo(() => (hasError ? '#FF0B0B' : '#666'), [hasError]);
 
@@ -50,6 +52,15 @@ const Select = ({
     onChange(option);
     closeModal();
   };
+
+  const filteredOptions = useMemo(
+    () => [
+      { label: 'Limpar seleção', value: null },
+      ...options.filter((option) => option?.label?.toLowerCase()
+        .includes(searchText?.toLowerCase())),
+    ],
+    [options, searchText],
+  );
 
   return (
     <>
@@ -86,25 +97,33 @@ const Select = ({
           <Title variant="subtitle">
             {placeholder}
           </Title>
-          <OptionsView>
-            <Option
-              onPress={handleChange('')}
-            >
-              <OptionText small>
-                Limpar seleção
-              </OptionText>
-            </Option>
-            {options?.map((option) => (
+          <SearchContainer>
+            <Input
+              iconName="search"
+              value={searchText}
+              onChangeText={setSearchText}
+              variant="small"
+              placeholder="Pesquisar"
+            />
+          </SearchContainer>
+          <VirtualizedList
+            style={{ flex: 1 }}
+            data={filteredOptions}
+            initialNumToRender={20}
+            keyExtractor={(option) => option.value}
+            getItem={(data, index) => data[index]}
+            getItemCount={() => filteredOptions.length}
+            renderItem={({ item }) => (
               <Option
-                key={option.value}
-                onPress={handleChange(option.value)}
+                key={item.value}
+                onPress={handleChange(item.value)}
               >
                 <OptionText>
-                  {option.label}
+                  {item.label}
                 </OptionText>
               </Option>
-            ))}
-          </OptionsView>
+            )}
+          />
         </OptionsContainer>
       </Modal>
     </>
