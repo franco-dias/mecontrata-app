@@ -13,6 +13,15 @@ const Container = styled.View`
   border-width: 2px;
   border-color: transparent;
   padding: 0 16px;
+  width: 100%;
+  ${({ variant }) => variant === 'small' && css`
+    border-radius: 18px;
+    height: 36px;
+    border-color: transparent;
+    border-width: 1px;
+    padding: 0 8px 0 16px;
+  `}
+
   ${({ hasError }) => hasError && css`
     border-color: #FF0B0B;
   `}
@@ -25,6 +34,10 @@ const Field = styled.TextInput`
   flex: 1;
   font-size: 16px;
   font-family: InterRegular;
+  padding: 0;
+  ${({ variant }) => variant === 'small' && css`
+    font-size: 14px;
+  `}
 `;
 
 const Icon = styled((props) => <GenericIcon {...props} />)`

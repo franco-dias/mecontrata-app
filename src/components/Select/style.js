@@ -59,10 +59,6 @@ const OptionsContainer = styled.View`
   z-index: 2;
 `;
 
-const OptionsView = styled.ScrollView`
-  margin-top: 8px;
-`;
-
 const Option = styled.TouchableOpacity`
   border-bottom-width: 1px;
   padding: 12px 0;
@@ -86,16 +82,20 @@ const Error = styled.Text`
   margin-left: 12px;
 `;
 
+const SearchContainer = styled.View`
+  margin-top: 12px;
+`;
+
 export {
   Container,
   Field,
   FieldText,
   Icon,
-  OptionsView,
   Option,
   OptionText,
   OptionsContainer,
   Title,
   Backdrop,
   Error,
+  SearchContainer,
 };

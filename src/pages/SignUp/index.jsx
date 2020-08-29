@@ -100,6 +100,7 @@ const SignUp = ({ navigation }) => {
                 iconName="mail-outline"
                 placeholder="E-mail"
                 onChangeText={handleChange('email')}
+                autoCapitalize="none"
                 value={values.email}
                 error={errors.email}
               />
@@ -110,6 +111,7 @@ const SignUp = ({ navigation }) => {
                 placeholder="Senha"
                 onChangeText={handleChange('password')}
                 secureTextEntry
+                autoCapitalize="none"
                 value={values.password}
                 error={errors.password}
               />
@@ -120,6 +122,7 @@ const SignUp = ({ navigation }) => {
                 placeholder="Senha"
                 onChangeText={handleChange('confirmPassword')}
                 secureTextEntry
+                autoCapitalize="none"
                 value={values.confirmPassword}
                 error={errors.confirmPassword}
               />

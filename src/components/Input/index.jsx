@@ -15,6 +15,7 @@ const Input = ({
   touched,
   onBlur,
   onIconPress,
+  variant,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -38,11 +39,13 @@ const Input = ({
       <Container
         isFocused={isFocused}
         hasError={hasError && touched}
+        variant={variant}
       >
         <Field
           onFocus={handleFocus}
           onBlur={handleBlur}
           {...props}
+          variant={variant}
         />
         <IconButton onPress={onIconPress}>
           <Icon
@@ -68,6 +71,7 @@ Input.defaultProps = {
   error: '',
   touched: false,
   onIconPress: () => {},
+  variant: 'normal',
 };
 
 Input.propTypes = {
@@ -76,6 +80,7 @@ Input.propTypes = {
   error: PropTypes.string,
   touched: PropTypes.bool,
   onIconPress: PropTypes.func,
+  variant: PropTypes.string,
 };
 
 export default memo(Input);
