@@ -42,7 +42,7 @@ function AdService({
   }, [id]);
 
   const gallery = useMemo(
-    () => adData.photos?.map((photo) => `http://10.0.2.2:3333/${photo.url}`),
+    () => adData.photos?.map((photo) => `http://localhost:3333/${photo.url}`),
     [adData],
   );
 
@@ -50,7 +50,7 @@ function AdService({
     <Container>
       <TitleWrapper>
         <Row>
-          <UserPhoto source={{ uri: `http://10.0.2.2:3333/${adData.user?.avatar?.url}` }} />
+          <UserPhoto source={{ uri: `http://localhost:3333/${adData.user?.avatar?.url}` }} />
           <Col>
             <UsernameAndIcon>
               <Typography variant="subtitle" color="#333951">
