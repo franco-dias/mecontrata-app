@@ -67,7 +67,7 @@ const CategoryServices = ({ route, navigation }) => {
             <CardWrapper key={service.id}>
               <ServiceCard
                 color={service.category?.color}
-                url={`http://10.0.2.2:3333/${service.photos[0]?.url}`}
+                url={`http://localhost:3333/${service.photos[0]?.url}`}
                 name={service.user.name}
                 occupation={service.job?.description}
                 onPress={() => navigation.navigate('AdService', { id: service.id })}
