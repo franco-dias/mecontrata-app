@@ -23,7 +23,7 @@ const CustomDrawer = ({ navigation }) => {
         <UserInfo>
           <UserImage
             source={{
-              uri: `http://localhost:3333/${userData?.avatar?.url}`,
+              uri: `http://10.0.2.2:3333/${userData?.avatar?.url}`,
             }}
           />
           <View>
